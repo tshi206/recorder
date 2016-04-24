@@ -1,11 +1,3 @@
-<?php
-<script type="text/javascript" src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/webrtc/adapter/master/adapter.js"></script>
-script('recorder', 'audiodisplay.js');
-script('recorder', 'main');
-script('recorder', 'recorder');
-style('recorder', 'recorder');
-?> 
 
 <div>
     <button id="start-recording" onclick="toggleRecording(this);">Record</button>
