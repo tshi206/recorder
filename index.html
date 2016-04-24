@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head><title>
+	Capture Audio
+</title>
+    <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
+    <!-- for Edige/FF/Chrome/Opera/etc. getUserMedia support -->
+    <script src="https://cdn.rawgit.com/webrtc/adapter/master/adapter.js"></script>
+
+    <script src="js/audiodisplay.js"></script>
+    <script src="js/main.js"></script>
+
+    <style>
+    html { overflow: hidden; }
+    body { 
+        font: 14pt Arial, sans-serif; 
+        background: lightgrey;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+        margin: 0 0;
+    }
+    canvas { 
+        display: inline-block; 
+        background: #202020; 
+        width: 95%;
+        height: 45%;
+        box-shadow: 0px 0px 10px blue;
+    }
+    #controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        height: 20%;
+        width: 100%;
+    }
+    #record { height: 15vh; }
+    #record.recording { 
+        background: red;
+        background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
+        background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
+        background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
+    }
+    #save, #save img { height: 10vh; }
+    #save { opacity: 0.25;}
+    #save[download] { opacity: 1;}
+    #viz {
+        height: 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    @media (orientation: landscape) {
+        body { flex-direction: row;}
+        #controls { flex-direction: column; height: 100%; width: 10%;}
+        #viz { height: 100%; width: 90%;}
+    }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <button id="start-recording" onclick="toggleRecording(this);">Record</button>
+        <button id="stop-recording" disabled>Stop Recording</button>
+        <button id="save-recording" disabled>Save Recording</button>
+        <br><br>
+    </div>
+<!-- 
+    <div id="audios-container"></div>
+    <div id="viz">
+        <canvas id="analyser" width="1024" height="500"></canvas>
+        <canvas id="wavedisplay" width="1024" height="500"></canvas>
+    </div>
+ -->
+    <script>
+    function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+        navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
+    }
+    var mediaConstraints = {
+        audio: true
+    };
+    document.querySelector('#start-recording').onclick = function() {
+        this.disabled = true;
+        document.querySelector('#stop-recording').disabled = false;
+        captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+    };
+    document.querySelector('#stop-recording').onclick = function() {
+        this.disabled = true;
+        document.querySelector('#save-recording').disabled = false;
+        document.querySelector('#start-recording').disabled = false;
+        mediaRecorder.stop();
+        mediaRecorder.stream.stop();
+    };
+    document.querySelector('#save-recording').onclick = function() {
+        this.disabled = true;
+        document.querySelector('#start-recording').disabled = false;
+        mediaRecorder.save();
+    };
+    var mediaRecorder;
+    function onMediaSuccess(stream) {
+        var audio = document.createElement('audio');
+        audio = mergeProps(audio, {
+            controls: true,
+            muted: true,
+            src: URL.createObjectURL(stream)
+        });
+        audio.play();
+        audiosContainer.appendChild(audio);
+        audiosContainer.appendChild(document.createElement('hr'));
+        mediaRecorder = new MediaStreamRecorder(stream);
+        mediaRecorder.stream = stream;
+        mediaRecorder.mimeType = 'audio/wav';
+        mediaRecorder.audioChannels = 1;
+        mediaRecorder.ondataavailable = function(blob) {
+            var a = document.createElement('a');
+            a.target = '_blank';
+            a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ')';
+            a.href = URL.createObjectURL(blob);
+            audiosContainer.appendChild(a);
+            audiosContainer.appendChild(document.createElement('hr'));
+        };
+        // get blob after specific time interval
+        mediaRecorder.start(5000);
+        document.querySelector('#stop-recording').disabled = false;
+        document.querySelector('#pause-recording').disabled = false;
+        document.querySelector('#save-recording').disabled = false;
+    }
+    function onMediaError(e) {
+        console.error('media error', e);
+    }
+    var audiosContainer = document.getElementById('audios-container');
+    var index = 1;
+    // below function via: http://goo.gl/B3ae8c
+    function bytesToSize(bytes) {
+        var k = 1000;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes === 0) return '0 Bytes';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(k)), 10);
+        return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+    }
+    // below function via: http://goo.gl/6QNDcI
+    function getTimeLength(milliseconds) {
+        var data = new Date(milliseconds);
+        return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
+    }
+    window.onbeforeunload = function() {
+        document.querySelector('#start-recording').disabled = false;
+    };
+
+    </script>
+</body>
+</html>
