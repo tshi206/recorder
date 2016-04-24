@@ -1,9 +1,7 @@
 <?php
 script('recorder', 'script');
 style('recorder', 'style');
-
-<script type="text/javascript" src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/webrtc/adapter/master/adapter.js"></script>
+script('recorder', 'MediaStreamRecorder');
 script('recorder', 'audiodisplay');
 script('recorder', 'main');
 script('recorder', 'recorder');
