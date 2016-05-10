@@ -70,7 +70,7 @@ function toggleRecording( e ) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click', toggleRecording);
+  document.querySelector('button').addEventListener('click', this.toggleRecording);
 });
 
 function convertToMono( input ) {
