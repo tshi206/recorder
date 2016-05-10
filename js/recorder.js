@@ -4,19 +4,19 @@
     var mediaConstraints = {
         audio: true
     };
-    document.querySelector('#start-recording').onclick = function() {
+    document.querySelector('#start-recording').onclick=function() {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
         captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
     };
-    document.querySelector('#stop-recording').onclick = function() {
+    document.querySelector('#stop-recording').onclick=function() {
         this.disabled = true;
         document.querySelector('#save-recording').disabled = false;
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.stop();
         mediaRecorder.stream.stop();
     };
-    document.querySelector('#save-recording').onclick = function() {
+    document.querySelector('#save-recording').onclick=function() {
         this.disabled = true;
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.save();
