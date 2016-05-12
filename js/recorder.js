@@ -1,5 +1,4 @@
 
-    var mediaRecorder = null;
 
 
     function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
@@ -65,16 +64,16 @@
         this.disabled = true;
         document.querySelector('#pause-recording').disabled = true;
         document.querySelector('#stop-recording').disabled = true;
-
         mediaRecorder.save();
     }, false);   
 
 }, false);
 
  
+    var mediaRecorder;
     function onMediaSuccess(stream) {
         var audio = document.createElement('audio');
-
+        mediaRecorder = new MediaStreamRecorder(stream);
         mediaRecorder.mimeType = 'audio/wabv'; // audio/webm or audio/ogg or audio/wav
 
         audio = mergeProps(audio, {
