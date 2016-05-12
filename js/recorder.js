@@ -32,42 +32,34 @@
     document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('start-recording').addEventListener('click', function () {
-        captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-        this.disabled = true;
-        document.querySelector('#stop-recording').disabled = false;
-        document.querySelector('#pause-recording').disabled = false;
+                this.disabled = true;
+                captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
       }, false);
 
     document.getElementById('stop-recording').addEventListener('click', function () {
         this.disabled = true;
         mediaRecorder.stop();
         mediaRecorder.stream.stop();
-
         document.querySelector('#pause-recording').disabled = true;
-        document.querySelector('#save-recording').disabled = false;
         document.querySelector('#start-recording').disabled = false;
     }, false);
 
-      document.getElementById('save-recording').addEventListener('click', function () {
+    document.getElementById('pause-recording').addEventListener('click', function () {
         this.disabled = true;
-        document.querySelector('#start-recording').disabled = false;
-        mediaRecorder.save();
-    }, false);
-
-      document.getElementById('pause-recording').addEventListener('click', function () {
-        this.disabled = true;
+        mediaRecorder.pause();
         document.querySelector('#resume-recording').disabled = false;
-        mediaRecorder.save();
     }, false);
 
-   
-      document.getElementById('resume-recording').addEventListener('click', function () {
+    document.getElementById('resume-recording').addEventListener('click', function () {
         this.disabled = true;
+        mediaRecorder.resume();
         document.querySelector('#pause-recording').disabled = false;
-        document.querySelector('#stop-recording').disabled = false;
-
-        mediaRecorder.save();
     }, false);
+
+    document.getElementById('save-recording').addEventListener('click', function () {
+        this.disabled = true;
+        mediaRecorder.save();
+    }, false);   
 
 }, false);
 
@@ -82,6 +74,7 @@
             muted: true,
             src: URL.createObjectURL(stream)
         });
+
         audio.play();
         audiosContainer.appendChild(audio);
         audiosContainer.appendChild(document.createElement('hr'));
@@ -104,13 +97,15 @@
 
         // get blob after specific time interval
         mediaRecorder.start(timeInterval);
-        document.querySelector('#stop-recording').disabled = false;
+/*        document.querySelector('#stop-recording').disabled = false;
         document.querySelector('#pause-recording').disabled = false;
         document.querySelector('#save-recording').disabled = false;
-    }
+*/    }
+    
     function onMediaError(e) {
         console.error('media error', e);
     }
+
     var audiosContainer = document.getElementById('audios-container');
     var index = 1;
     // below function via: http://goo.gl/B3ae8c
