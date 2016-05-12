@@ -5,6 +5,7 @@
     var mediaConstraints = {
         audio: true
     };
+    /*
     document.querySelector('#start-recording').onclick=function() {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
@@ -22,6 +23,31 @@
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.save();
     };
+
+    */
+    window.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('start-recording').addEventListener('click', function () {
+        this.disabled = true;
+        document.querySelector('#stop-recording').disabled = false;
+        captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);    }, false);
+
+    document.getElementById('stop-recording').addEventListener('click', function () {
+        this.disabled = true;
+        document.querySelector('#save-recording').disabled = false;
+        document.querySelector('#start-recording').disabled = false;
+        mediaRecorder.stop();
+        mediaRecorder.stream.stop();
+
+    }, false);
+
+      document.getElementById('save-recording').addEventListener('click', function () {
+        this.disabled = true;
+        document.querySelector('#start-recording').disabled = false;
+        mediaRecorder.save();
+
+    }, false);
+}, false);
+
     var mediaRecorder;
     function onMediaSuccess(stream) {
         var audio = document.createElement('audio');
