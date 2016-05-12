@@ -25,7 +25,6 @@
     };
 
     */
-    var mediaRecorder;
 
      window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-recording').addEventListener('click', function () {
@@ -49,10 +48,14 @@
 
     }, false);
 }, false);
+    var mediaRecorder;
 
  
     function onMediaSuccess(stream) {
         var audio = document.createElement('audio');
+
+        mediaRecorder.mimeType = 'audio/wabv'; // audio/webm or audio/ogg or audio/wav
+
         audio = mergeProps(audio, {
             controls: true,
             muted: true,
@@ -73,7 +76,13 @@
             audiosContainer.appendChild(a);
             audiosContainer.appendChild(document.createElement('hr'));
         };
+
+        var timeInterval = document.querySelector('#time-interval').value;
+        if (timeInterval) timeInterval = parseInt(timeInterval);
+        else timeInterval = 5 * 1000;
+
         // get blob after specific time interval
+        mediaRecorder.start(timeInterval);
         mediaRecorder.start(5000);
         document.querySelector('#stop-recording').disabled = false;
         document.querySelector('#pause-recording').disabled = false;

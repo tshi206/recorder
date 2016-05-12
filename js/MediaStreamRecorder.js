@@ -1,4 +1,4 @@
-// Last time updated: 2016-04-15 12:50:55 PM UTC
+// Last time updated: 2016-05-05 6:31:59 AM UTC
 
 // links:
 // Open-Sourced: https://github.com/streamproc/MediaStreamRecorder
@@ -48,6 +48,11 @@ function MediaStreamRecorder(mediaStream) {
         // video recorder (in GIF format)
         if (this.mimeType === 'image/gif') {
             Recorder = GifRecorder;
+        }
+
+        // audio/wav is supported only via StereoAudioRecorder
+        if (this.mimeType === 'audio/wav') {
+            Recorder = StereoAudioRecorder;
         }
 
         // allows forcing StereoAudioRecorder.js on Edge/Firefox
@@ -127,7 +132,14 @@ function MediaStreamRecorder(mediaStream) {
         console.log('Resumed recording.', this.mimeType || mediaRecorder.mimeType);
     };
 
-    this.recorderType = null; // StereoAudioRecorder || WhammyRecorder || MediaRecorderWrapper || GifRecorder
+    // StereoAudioRecorder || WhammyRecorder || MediaRecorderWrapper || GifRecorder
+    this.recorderType = null;
+
+    // video/webm or audio/webm or audio/ogg or audio/wav
+    this.mimeType = 'video/webm';
+
+    // logs are enabled by default
+    this.disableLogs = false;
 
     // Reference to "MediaRecorder.js"
     var mediaRecorder;
@@ -257,8 +269,73 @@ function MultiStreamRecorder(mediaStream) {
     var recordingInterval = 0;
 }
 
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.MultiStreamRecorder = MultiStreamRecorder;
+}
+
 // _____________________________
 // Cross-Browser-Declarations.js
+
+var browserFakeUserAgent = 'Fake/5.0 (FakeOS) AppleWebKit/123 (KHTML, like Gecko) Fake/12.3.4567.89 Fake/123.45';
+
+(function(that) {
+    if (typeof window !== 'undefined') {
+        return;
+    }
+
+    if (typeof window === 'undefined' && typeof global !== 'undefined') {
+        global.navigator = {
+            userAgent: browserFakeUserAgent,
+            getUserMedia: function() {}
+        };
+
+        /*global window:true */
+        that.window = global;
+    } else if (typeof window === 'undefined') {
+        // window = this;
+    }
+
+    if (typeof document === 'undefined') {
+        /*global document:true */
+        that.document = {};
+
+        document.createElement = document.captureStream = document.mozCaptureStream = function() {
+            return {};
+        };
+    }
+
+    if (typeof location === 'undefined') {
+        /*global location:true */
+        that.location = {
+            protocol: 'file:',
+            href: '',
+            hash: ''
+        };
+    }
+
+    if (typeof screen === 'undefined') {
+        /*global screen:true */
+        that.screen = {
+            width: 0,
+            height: 0
+        };
+    }
+})(typeof global !== 'undefined' ? global : window);
+
+// WebAudio API representer
+var AudioContext = window.AudioContext;
+
+if (typeof AudioContext === 'undefined') {
+    if (typeof webkitAudioContext !== 'undefined') {
+        /*global AudioContext:true */
+        AudioContext = webkitAudioContext;
+    }
+
+    if (typeof mozAudioContext !== 'undefined') {
+        /*global AudioContext:true */
+        AudioContext = mozAudioContext;
+    }
+}
 
 if (typeof window === 'undefined') {
     /*jshint -W020 */
@@ -297,9 +374,9 @@ if (typeof navigator !== 'undefined') {
         navigator.getUserMedia = navigator.mozGetUserMedia;
     }
 } else {
-    /*global navigator:true */
-    var navigator = {
-        getUserMedia: {}
+    navigator = {
+        getUserMedia: function() {},
+        userAgent: browserFakeUserAgent
     };
 }
 
@@ -615,6 +692,9 @@ function MediaRecorderWrapper(mediaStream) {
             });
 
             self.ondataavailable(blob);
+
+            // record next interval
+            self.start(timeSlice);
         };
 
         mediaRecorder.onerror = function(error) {
@@ -650,7 +730,19 @@ function MediaRecorderWrapper(mediaStream) {
         // handler. "mTimeSlice < 0" means Session object does not push encoded data to
         // onDataAvailable, instead, it passive wait the client side pull encoded data
         // by calling requestData API.
-        mediaRecorder.start(timeSlice || 3.6e+6);
+        mediaRecorder.start(3.6e+6);
+
+        setTimeout(function() {
+            if (!mediaRecorder) {
+                return;
+            }
+
+            if (mediaRecorder.state === 'recording') {
+                // "stop" method auto invokes "requestData"!
+                mediaRecorder.requestData();
+                mediaRecorder.stop();
+            }
+        }, timeSlice);
 
         // Start recording. If timeSlice has been provided, mediaRecorder will
         // raise a dataavailable event containing the Blob of collected data on every timeSlice milliseconds.
@@ -771,8 +863,6 @@ function MediaRecorderWrapper(mediaStream) {
         return true;
     }
 
-    var self = this;
-
     // this method checks if media stream is stopped
     // or any track is ended.
     (function looper() {
@@ -787,6 +877,10 @@ function MediaRecorderWrapper(mediaStream) {
 
         setTimeout(looper, 1000); // check every second
     })();
+}
+
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.MediaRecorderWrapper = MediaRecorderWrapper;
 }
 
 // ======================
@@ -835,6 +929,10 @@ function StereoAudioRecorder(mediaStream) {
     // Reference to "StereoAudioRecorder" object
     var mediaRecorder;
     var timeout;
+}
+
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.StereoAudioRecorder = StereoAudioRecorder;
 }
 
 // ============================
@@ -1068,6 +1166,10 @@ function StereoAudioRecorderHelper(mediaStream, root) {
     scriptprocessornode.connect(context.destination);
 }
 
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.StereoAudioRecorderHelper = StereoAudioRecorderHelper;
+}
+
 // ===================
 // WhammyRecorder.js
 
@@ -1126,6 +1228,10 @@ function WhammyRecorder(mediaStream) {
     // Reference to "WhammyRecorder" object
     var mediaRecorder;
     var timeout;
+}
+
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.WhammyRecorder = WhammyRecorder;
 }
 
 // ==========================
@@ -1425,6 +1531,10 @@ function WhammyRecorderHelper(mediaStream, root) {
     };
 }
 
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.WhammyRecorderHelper = WhammyRecorderHelper;
+}
+
 // --------------
 // GifRecorder.js
 
@@ -1559,6 +1669,10 @@ function GifRecorder(mediaStream) {
 
     var gifEncoder;
     var timeout;
+}
+
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.GifRecorder = GifRecorder;
 }
 
 // https://github.com/antimatter15/whammy/blob/master/LICENSE
@@ -1994,3 +2108,18 @@ var Whammy = (function() {
         Video: WhammyVideo
     };
 })();
+
+if (typeof MediaStreamRecorder !== 'undefined') {
+    MediaStreamRecorder.Whammy = Whammy;
+}
+
+// https://github.com/streamproc/MediaStreamRecorder/issues/42
+if (typeof module !== 'undefined' /* && !!module.exports*/ ) {
+    module.exports = MediaStreamRecorder;
+}
+
+if (typeof define === 'function' && define.amd) {
+    define('MediaStreamRecorder', [], function() {
+        return MediaStreamRecorder;
+    });
+}
