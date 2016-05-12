@@ -1,4 +1,7 @@
 
+    var mediaRecorder = null;
+
+
     function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
@@ -25,9 +28,9 @@
     };
 
     */
-    var mediaRecorder;
 
     document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('start-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
@@ -63,6 +66,8 @@
       document.getElementById('resume-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#pause-recording').disabled = false;
+        document.querySelector('#stop-recording').disabled = false;
+
         mediaRecorder.save();
     }, false);
 
