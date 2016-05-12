@@ -25,7 +25,9 @@
     };
 
     */
-    window.addEventListener('DOMContentLoaded', function () {
+    var mediaRecorder;
+
+     window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
@@ -48,7 +50,7 @@
     }, false);
 }, false);
 
-    var mediaRecorder;
+ 
     function onMediaSuccess(stream) {
         var audio = document.createElement('audio');
         audio = mergeProps(audio, {
