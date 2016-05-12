@@ -7,7 +7,7 @@ script('recorder', 'main');
 // script('recorder', 'recorder');
 style('recorder', 'recorder');
 ?>
-<js>
+<script>
 	    function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
@@ -82,7 +82,7 @@ style('recorder', 'recorder');
         document.querySelector('#start-recording').disabled = false;
     };
 
-</js>
+</script>
 
 <div id="app">
 	<div id="app-navigation">
