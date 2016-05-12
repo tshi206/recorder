@@ -32,11 +32,11 @@
     document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('start-recording').addEventListener('click', function () {
+        captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
         document.querySelector('#pause-recording').disabled = false;
-
-        captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);    }, false);
+      }, false);
 
     document.getElementById('stop-recording').addEventListener('click', function () {
         this.disabled = true;
@@ -46,8 +46,6 @@
         document.querySelector('#pause-recording').disabled = true;
         document.querySelector('#save-recording').disabled = false;
         document.querySelector('#start-recording').disabled = false;
-        mediaRecorder.stop();
-        mediaRecorder.stream.stop();
     }, false);
 
       document.getElementById('save-recording').addEventListener('click', function () {
@@ -71,7 +69,7 @@
         mediaRecorder.save();
     }, false);
 
-});
+}, false);
 
  
     function onMediaSuccess(stream) {
