@@ -1,5 +1,5 @@
 
-        function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+    function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
     var mediaConstraints = {
@@ -27,10 +27,12 @@
     */
     var mediaRecorder;
 
-     window.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
+        document.querySelector('#pause-recording').disabled = false;
+
         captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);    }, false);
 
     document.getElementById('stop-recording').addEventListener('click', function () {
@@ -39,7 +41,6 @@
         mediaRecorder.stream.stop();
 
         document.querySelector('#pause-recording').disabled = true;
-
         document.querySelector('#save-recording').disabled = false;
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.stop();
@@ -97,11 +98,10 @@
 
         var timeInterval = document.querySelector('#time-interval').value;
         if (timeInterval) timeInterval = parseInt(timeInterval);
-        else timeInterval = 5 * 1000;
+        else timeInterval = 2 * 1000;
 
         // get blob after specific time interval
         mediaRecorder.start(timeInterval);
-        mediaRecorder.start(5000);
         document.querySelector('#stop-recording').disabled = false;
         document.querySelector('#pause-recording').disabled = false;
         document.querySelector('#save-recording').disabled = false;
