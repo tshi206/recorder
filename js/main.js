@@ -52,7 +52,6 @@ function doneEncoding( blob ) {
     recIndex++;
 }
 
-
 function toggleRecording( e ) {
     if (e.classList.contains("recording")) {
         // stop recording
@@ -68,10 +67,6 @@ function toggleRecording( e ) {
         audioRecorder.record();
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('start-recording').addEventListener('click', toggleRecording(document.getElementById('start-recording')));
-});
 
 function convertToMono( input ) {
     var splitter = audioContext.createChannelSplitter(2);
