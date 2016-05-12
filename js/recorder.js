@@ -1,5 +1,4 @@
 
-    <script>
         function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
@@ -74,4 +73,3 @@
         document.querySelector('#start-recording').disabled = false;
     };
 
-</script>
