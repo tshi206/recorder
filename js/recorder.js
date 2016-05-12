@@ -27,7 +27,7 @@
     */
     var mediaRecorder;
 
-    window.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#stop-recording').disabled = false;
@@ -66,8 +66,7 @@
         mediaRecorder.save();
     }, false);
 
-
-}, false);
+});
 
  
     function onMediaSuccess(stream) {
