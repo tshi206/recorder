@@ -2,7 +2,7 @@
 script('recorder', 'script');
 style('recorder', 'style');
 script('recorder', 'MediaStreamRecorder');
-script('recorder', 'audiodisplay');
+// script('recorder', 'audiodisplay');
 script('recorder', 'main');
 // script('recorder', 'recorder');
 style('recorder', 'recorder');
