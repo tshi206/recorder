@@ -33,31 +33,39 @@
 
     document.getElementById('start-recording').addEventListener('click', function () {
                 this.disabled = true;
+                document.querySelector('#stop-recording').disabled = false;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
       }, false);
 
     document.getElementById('stop-recording').addEventListener('click', function () {
         this.disabled = true;
+        document.querySelector('#save-recording').disabled = false;
+        document.querySelector('#start-recording').disabled = false;
+        document.querySelector('#pause-recording').disabled = true;
+
         mediaRecorder.stop();
         mediaRecorder.stream.stop();
-        document.querySelector('#pause-recording').disabled = true;
-        document.querySelector('#start-recording').disabled = false;
     }, false);
 
     document.getElementById('pause-recording').addEventListener('click', function () {
         this.disabled = true;
-        mediaRecorder.pause();
         document.querySelector('#resume-recording').disabled = false;
+        mediaRecorder.pause();
     }, false);
 
     document.getElementById('resume-recording').addEventListener('click', function () {
         this.disabled = true;
-        mediaRecorder.resume();
         document.querySelector('#pause-recording').disabled = false;
+        document.querySelector('#stop-recording').disabled = false;
+        mediaRecorder.resume();
     }, false);
 
     document.getElementById('save-recording').addEventListener('click', function () {
         this.disabled = true;
+        document.querySelector('#pause-recording').disabled = true;
+        document.querySelector('#stop-recording').disabled = true;
+
         mediaRecorder.save();
     }, false);   
 
