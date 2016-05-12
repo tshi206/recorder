@@ -25,6 +25,7 @@
     };
 
     */
+    var mediaRecorder;
 
      window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-recording').addEventListener('click', function () {
@@ -34,21 +35,38 @@
 
     document.getElementById('stop-recording').addEventListener('click', function () {
         this.disabled = true;
+        mediaRecorder.stop();
+        mediaRecorder.stream.stop();
+
+        document.querySelector('#pause-recording').disabled = true;
+
         document.querySelector('#save-recording').disabled = false;
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.stop();
         mediaRecorder.stream.stop();
-
     }, false);
 
       document.getElementById('save-recording').addEventListener('click', function () {
         this.disabled = true;
         document.querySelector('#start-recording').disabled = false;
         mediaRecorder.save();
-
     }, false);
+
+      document.getElementById('pause-recording').addEventListener('click', function () {
+        this.disabled = true;
+        document.querySelector('#resume-recording').disabled = false;
+        mediaRecorder.save();
+    }, false);
+
+   
+      document.getElementById('resume-recording').addEventListener('click', function () {
+        this.disabled = true;
+        document.querySelector('#pause-recording').disabled = false;
+        mediaRecorder.save();
+    }, false);
+
+
 }, false);
-    var mediaRecorder;
 
  
     function onMediaSuccess(stream) {
