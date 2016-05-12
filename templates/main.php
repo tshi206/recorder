@@ -7,7 +7,20 @@ script('recorder', 'main');
 // script('recorder', 'recorder');
 style('recorder', 'recorder');
 ?>
-<script>
+
+<div id="app">
+	<div id="app-navigation">
+		<?php print_unescaped($this->inc('part.navigation')); ?>
+		<?php print_unescaped($this->inc('part.settings')); ?>
+	</div>
+
+	<div id="app-content">
+		<div id="app-content-wrapper">
+			<?php print_unescaped($this->inc('recorder')); ?>
+		</div>
+	</div>
+
+	<script>
 	    function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
@@ -84,15 +97,4 @@ style('recorder', 'recorder');
 
 </script>
 
-<div id="app">
-	<div id="app-navigation">
-		<?php print_unescaped($this->inc('part.navigation')); ?>
-		<?php print_unescaped($this->inc('part.settings')); ?>
-	</div>
-
-	<div id="app-content">
-		<div id="app-content-wrapper">
-			<?php print_unescaped($this->inc('recorder')); ?>
-		</div>
-	</div>
 </div>
