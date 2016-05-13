@@ -27,6 +27,7 @@
     };
 
     */
+    var mediaRecorder;
 
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -72,7 +73,6 @@
 }, false);
 
  
-    var mediaRecorder;
     function onMediaSuccess(stream) {
         var audio = document.createElement('audio');
         mediaRecorder = new MediaStreamRecorder(stream);
