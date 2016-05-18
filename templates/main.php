@@ -6,7 +6,7 @@ style('recorder', 'recorder');
 script('recorder', 'script');
 // script('recorder', 'bootstrap.min');
 script('recorder', 'EncoderDemo');
-script('recorder', 'EncoderWorker');
+// script('recorder', 'EncoderWorker');
 /*script('recorder', 'jquery.min');
 script('recorder', '');
 
