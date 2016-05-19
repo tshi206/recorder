@@ -11,30 +11,30 @@
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             };
 
-            document.querySelector('#stop-recording').onclick = function() {
+            $('#stop-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.stop();
                 mediaRecorder.stream.stop();
 
-                document.querySelector('#pause-recording').disabled = true;
-                document.querySelector('#start-recording').disabled = false;
+                $('#pause-recording').disabled = true;
+                $('#start-recording').disabled = false;
             };
 
-            document.querySelector('#pause-recording').onclick = function() {
+            $('#pause-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.pause();
 
-                document.querySelector('#resume-recording').disabled = false;
+                $('#resume-recording').disabled = false;
             };
 
-            document.querySelector('#resume-recording').onclick = function() {
+            $('#resume-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.resume();
 
-                document.querySelector('#pause-recording').disabled = false;
+                $('#pause-recording').disabled = false;
             };
 
-            document.querySelector('#save-recording').onclick = function() {
+            $('#save-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.save();
             };
@@ -69,16 +69,16 @@
                     audiosContainer.appendChild(document.createElement('hr'));
                 };
 
-                var timeInterval = document.querySelector('#time-interval').value;
+                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
                 // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
-                document.querySelector('#stop-recording').disabled = false;
-                document.querySelector('#pause-recording').disabled = false;
-                document.querySelector('#save-recording').disabled = false;
+                $('#stop-recording').disabled = false;
+                $('#pause-recording').disabled = false;
+                $('#save-recording').disabled = false;
             }
 
             function onMediaError(e) {
@@ -104,5 +104,5 @@
             }
 
             window.onbeforeunload = function() {
-                document.querySelector('#start-recording').disabled = false;
+                $('#start-recording').disabled = false;
             };
