@@ -13,7 +13,7 @@ script('recorder', 'WavAudioEncoder.min');
 script('recorder', 'gumadapter');
 script('recorder', 'MediaStreamRecorder');
 script('recorder', 'script');
-script('recorder', 'demo');
+//script('recorder', 'demo');
 
 
 ?>

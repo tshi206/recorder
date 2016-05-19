@@ -1,11 +1,11 @@
 
-        <section class="experiment" style="padding: 5px;">
+        <section class="experiment">
             <label for="time-interval">Time Interval (milliseconds):</label>
             <input type="text" id="time-interval" value="5000">ms
 
             <br>
 
-            <select id="audio-mimeType" style="font-size:22px;vertical-align: middle;margin-right: 5px;">
+            <select id="audio-mimeType">
                 <option>audio/webm</option>
                 <option>audio/wav</option>
             </select>
@@ -21,7 +21,7 @@
             <br>
             <br>
 
-            <input id="left-channel" type="checkbox" checked style="width:auto;">
+            <input id="left-channel" type="checkbox" checked>
             <label for="left-channel">Only Left Channel?</label>
         </section>
 
