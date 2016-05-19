@@ -6,7 +6,9 @@
                 audio: true
             };
 
+		alert("JS demo is applied!");
             $('#start-recording').onclick = function() {
+		alert("Function start is called!");
                 this.disabled = true;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             };
