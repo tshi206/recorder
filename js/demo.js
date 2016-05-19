@@ -6,7 +6,7 @@
                 audio: true
             };
 
-            document.querySelector('#start-recording').onclick = function() {
+            $('#start-recording').onclick = function() {
                 this.disabled = true;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             };
