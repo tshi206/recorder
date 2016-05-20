@@ -7,11 +7,11 @@
             };
 
 		alert("JS demo is applied!");
-            $('#start-recording').onclick = function() {
+            $('#start-recording').click(function () {
 		alert("Function start is called!");
                 this.disabled = true;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-            };
+            });
 
             $('#stop-recording').onclick = function() {
                 this.disabled = true;
