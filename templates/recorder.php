@@ -23,6 +23,8 @@
 
             <input id="left-channel" type="checkbox" checked>
             <label for="left-channel">Only Left Channel?</label>
+
+	    <button id="hello">Hello</button>
         </section>
 
         <section class="experiment">
