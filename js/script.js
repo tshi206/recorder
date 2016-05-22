@@ -84,21 +84,21 @@
                 audio.play();
 
                 audiosContainer.appendChild(audio);
-                audiosContainer.appendChild(document.create('hr'));
+                audiosContainer.appendChild(document.createElement('hr'));
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
-                mediaRecorder.mimeType = $('audio-mimeType').value;
-                mediaRecorder.audioChannels = !! $('left-channel').checked ? 1 : 2;
+                mediaRecorder.mimeType = document.getElementById('audio-mimeType').value;
+                mediaRecorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
                 mediaRecorder.ondataavailable = function(blob) {
-                    var a = document.create('a');
+                    var a = document.createElement('a');
                     a.target = '_blank';
                     a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ') Time Length: ' + getTimeLength(timeInterval);
 
                     a.href = URL.createObjectURL(blob);
 
                     audiosContainer.appendChild(a);
-                    audiosContainer.appendChild(document.create('hr'));
+                    audiosContainer.appendChild(document.createElement('hr'));
                 };
 
                 var timeInterval = $('#time-interval').value;
@@ -135,7 +135,7 @@
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
 
-            window.onbeforeunload = function() {
+            $(window).on('beforeunload', function(){
                 $('#start-recording').disabled = false;
             };
     });
