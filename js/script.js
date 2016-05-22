@@ -28,7 +28,6 @@
 		});
 */
 
-document.addEventListener( 'DOMContentLoaded', function () {
     var ready = function ( fn ) {
 
         // Sanity check
@@ -48,8 +47,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
     };
 
-}, false );
 
+/*document.addEventListener( 'DOMContentLoaded', function () {
+
+}, false );
+*/
 // Example
 
 ready(function() {
