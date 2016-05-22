@@ -1,9 +1,9 @@
 
         <section class="experiment">
-            <label for="time-interval">Time Interval (milliseconds):</label>
+<!--             <label for="time-interval">Time Interval (milliseconds):</label>
             <input type="text" id="time-interval" value="5000">ms
 
-            <br>
+ -->            <br>
 
 <!--             <select id="audio-mimeType">
                 <option>audio/webm</option>

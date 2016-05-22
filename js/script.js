@@ -90,7 +90,7 @@
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
-                mediaRecorder.mimeType = audio/wav; /*document.getElementById('audio-mimeType').value;*/
+                mediaRecorder.mimeType = 'audio/wav'; /*document.getElementById('audio-mimeType').value;*/
                 mediaRecorder.audioChannels = 1; /*!!document.getElementById('left-channel').checked ? 1 : 2;*/
                 mediaRecorder.ondataavailable = function(blob) {
                     var a = document.createElement('a');
@@ -112,10 +112,10 @@
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
-/*                $('#stop-recording').disabled = false;
-                $('#pause-recording').disabled = false;
-                $('#save-recording').disabled = false;
-*/            }
+                $('#stop-recording').prop('disabled', false);
+                $('#pause-recording').prop('disabled', false);
+                $('#save-recording').prop('disabled', false);
+            }
 
             function onMediaError(e) {
                 console.error('media error', e);
