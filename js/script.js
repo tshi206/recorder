@@ -7,25 +7,26 @@
  * @author Shawn <syu702@aucklanduni.ac.nz>
  * @copyright Shawn 2016
  */
+/*
+(function (document.getElementById, OC) {
 
-(function ($, OC) {
-
-	$(document).ready(function () {
-		$('#hello').click(function () {
+	document.getElementById(document).ready(function () {
+		document.getElementById('#hello').onclick = function () {
 			alert('Hello from your script file');
 		});
 
-		$('#echo').click(function () {
+		document.getElementById('#echo').onclick = function () {
 			var url = OC.generateUrl('/apps/recorder/echo');
 			var data = {
-				echo: $('#echo-content').val()
+				echo: document.getElementById('#echo-content').val()
 			};
 
-			$.post(url, data).success(function (response) {
-				$('#echo-result').text(response.echo);
+			document.getElementById.post(url, data).success(function (response) {
+				document.getElementById('#echo-result').text(response.echo);
 			});
 
 		});
+*/
 
             function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
                 navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
@@ -35,37 +36,37 @@
                 audio: true
             };
 
-		alert("JS demo is applied!");
-            $('#start-recording').click(function () {
-		alert("Function start is called!");
+		// alert("JS demo is applied!");
+            document.getElementById('#start-recording').onclick = function () {
+		// alert("Function start is called!");
                 this.disabled = true;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-            });
+            };
 
-            $('#stop-recording').onclick = function() {
+            document.getElementById('#stop-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.stop();
                 mediaRecorder.stream.stop();
 
-                $('#pause-recording').disabled = true;
-                $('#start-recording').disabled = false;
+                document.getElementById('#pause-recording').disabled = true;
+                document.getElementById('#start-recording').disabled = false;
             };
 
-            $('#pause-recording').onclick = function() {
+            document.getElementById('#pause-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.pause();
 
-                $('#resume-recording').disabled = false;
+                document.getElementById('#resume-recording').disabled = false;
             };
 
-            $('#resume-recording').onclick = function() {
+            document.getElementById('#resume-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.resume();
 
-                $('#pause-recording').disabled = false;
+                document.getElementById('#pause-recording').disabled = false;
             };
 
-            $('#save-recording').onclick = function() {
+            document.getElementById('#save-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.save();
             };
@@ -100,16 +101,16 @@
                     audiosContainer.appendChild(document.createElement('hr'));
                 };
 
-                var timeInterval = $('#time-interval').value;
+                var timeInterval = document.getElementById('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
                 // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
-                $('#stop-recording').disabled = false;
-                $('#pause-recording').disabled = false;
-                $('#save-recording').disabled = false;
+                document.getElementById('#stop-recording').disabled = false;
+                document.getElementById('#pause-recording').disabled = false;
+                document.getElementById('#save-recording').disabled = false;
             }
 
             function onMediaError(e) {
@@ -135,8 +136,7 @@
             }
 
             window.onbeforeunload = function() {
-                $('#start-recording').disabled = false;
+                document.getElementById('#start-recording').disabled = false;
             };
-	});
 
-})(jQuery, OC);
+// )(jQuery, OC);
