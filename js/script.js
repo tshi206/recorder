@@ -27,8 +27,8 @@
 
 		});
 */
-
-            function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+document.addEventListener("DOMContentLoaded", function(event) { 
+             function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
                 navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
             }
 
@@ -138,5 +138,8 @@
             window.onbeforeunload = function() {
                 document.getElementById('#start-recording').disabled = false;
             };
+
+ //do work
+});
 
 // )(jQuery, OC);
