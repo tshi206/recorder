@@ -48,7 +48,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
     };
 
-}
+}, false );
 
 // Example
 
@@ -164,8 +164,7 @@ ready(function() {
             window.onbeforeunload = function() {
                 document.getElementById('#start-recording').disabled = false;
             };
-}, false );
-
+});
 /*	});
 
 })(jQuery, OC);
