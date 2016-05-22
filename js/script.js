@@ -117,7 +117,7 @@
                 console.error('media error', e);
             }
 
-            var audiosContainer = $('audios-container');
+            var audiosContainer = document.getElementById('audios-container');
             var index = 1;
 
             // below function via: http://goo.gl/B3ae8c
