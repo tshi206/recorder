@@ -135,7 +135,7 @@
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
 
-            $(window).on('beforeunload', function(){
+            window.onbeforeunload = function() {
                 $('#start-recording').disabled = false;
             };
     });
