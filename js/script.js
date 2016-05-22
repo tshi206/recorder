@@ -37,6 +37,9 @@
 
             $('#start-recording').click(function() {
                 this.disabled = true;
+                $('#pause-recording').disabled = false;
+                $('#stop-recording').disabled = false;
+
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             });
 
@@ -81,21 +84,21 @@
                 audio.play();
 
                 audiosContainer.appendChild(audio);
-                audiosContainer.appendChild(document.createElement('hr'));
+                audiosContainer.appendChild(document.create('hr'));
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
-                mediaRecorder.mimeType = document.getElementById('audio-mimeType').value;
-                mediaRecorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
+                mediaRecorder.mimeType = $('audio-mimeType').value;
+                mediaRecorder.audioChannels = !! $('left-channel').checked ? 1 : 2;
                 mediaRecorder.ondataavailable = function(blob) {
-                    var a = document.createElement('a');
+                    var a = document.create('a');
                     a.target = '_blank';
                     a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ') Time Length: ' + getTimeLength(timeInterval);
 
                     a.href = URL.createObjectURL(blob);
 
                     audiosContainer.appendChild(a);
-                    audiosContainer.appendChild(document.createElement('hr'));
+                    audiosContainer.appendChild(document.create('hr'));
                 };
 
                 var timeInterval = $('#time-interval').value;
@@ -114,7 +117,7 @@
                 console.error('media error', e);
             }
 
-            var audiosContainer = document.getElementById('audios-container');
+            var audiosContainer = $('audios-container');
             var index = 1;
 
             // below function via: http://goo.gl/B3ae8c
