@@ -11,11 +11,11 @@
 (function (document.getElementById, OC) {
 
 	document.getElementById(document).ready(function () {
-		document.getElementById('#hello').onclick = function () {
+		document.getElementById('#hello').click(function () {
 			alert('Hello from your script file');
 		});
 
-		document.getElementById('#echo').onclick = function () {
+		document.getElementById('#echo').click(function () {
 			var url = OC.generateUrl('/apps/recorder/echo');
 			var data = {
 				echo: document.getElementById('#echo-content').val()
@@ -27,8 +27,8 @@
 
 		});
 */
-document.addEventListener("DOMContentLoaded", function(event) { 
-             function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+window.onbeforeunload = function(){
+            function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
                 navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
             }
 
@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             window.onbeforeunload = function() {
                 document.getElementById('#start-recording').disabled = false;
             };
+}
+/*	});
 
- //do work
-});
-
-// )(jQuery, OC);
+})(jQuery, OC);
+*/
