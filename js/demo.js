@@ -6,40 +6,40 @@
                 audio: true
             };
 
-		alert("JS demo is applied!");
-            $('#start-recording').click(function () {
-		alert("Function start is called!");
+		// alert("JS demo is applied!");
+            document.getElementById('#start-recording').onclick = function () {
+		// alert("Function start is called!");
                 this.disabled = true;
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-            });
+            };
 
-            $('#stop-recording').click(function() {
+            document.getElementById('#stop-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.stop();
                 mediaRecorder.stream.stop();
 
-                $('#pause-recording').disabled = true;
-                $('#start-recording').disabled = false;
-            });
+                document.getElementById('#pause-recording').disabled = true;
+                document('#start-recording').disabled = false;
+            };
 
-            $('#pause-recording').click(function() {
+            document.getElementById('#pause-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.pause();
 
-                $('#resume-recording').disabled = false;
-            });
+                document.getElementById('#resume-recording').disabled = false;
+            };
 
-            $('#resume-recording').click(function() {
+            document.getElementById('#resume-recording').onclick = function() {
                 this.disabled = true;
                 mediaRecorder.resume();
 
-                $('#pause-recording').disabled = false;
-            });
+                document.getElementById('#pause-recording').disabled = false;
+            };
 
-            $('#save-recording').click(function() {
+            document.getElementById('#save-recording').onclick =function() {
                 this.disabled = true;
                 mediaRecorder.save();
-            });
+            };
 
             var mediaRecorder;
 
@@ -71,16 +71,16 @@
                     audiosContainer.appendChild(document.createElement('hr'));
                 };
 
-                var timeInterval = $('#time-interval').value;
+                var timeInterval = document.getElementById('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
                 // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
-                $('#stop-recording').disabled = false;
-                $('#pause-recording').disabled = false;
-                $('#save-recording').disabled = false;
+                document.getElementById('#stop-recording').disabled = false;
+                document.getElementById('#pause-recording').disabled = false;
+                document.getElementById('#save-recording').disabled = false;
             }
 
             function onMediaError(e) {
@@ -105,6 +105,7 @@
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
 
+
             window.onbeforeunload = function() {
-                $('#start-recording').disabled = false;
+                document.getElementById('#start-recording').disabled = false;
             };
