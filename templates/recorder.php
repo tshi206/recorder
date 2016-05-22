@@ -5,11 +5,11 @@
 
             <br>
 
-            <select id="audio-mimeType">
+<!--             <select id="audio-mimeType">
                 <option>audio/webm</option>
                 <option>audio/wav</option>
             </select>
-
+ -->
             <button id="start-recording">Start</button>
             <button id="stop-recording" disabled>Stop</button>
 
@@ -21,10 +21,10 @@
             <br>
             <br>
 
-            <input id="left-channel" type="checkbox" checked>
+<!--             <input id="left-channel" type="checkbox" checked>
             <label for="left-channel">Only Left Channel?</label>
 
-	    <button id="hello">Hello</button>
+ -->	    <button id="hello">Hello</button>
         </section>
 
         <section class="experiment">

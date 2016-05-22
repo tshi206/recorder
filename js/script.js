@@ -35,10 +35,12 @@
                 audio: true
             };
 
+            // var pauseRecording = $('#pause-recording');
+
             $('#start-recording').click(function() {
                 this.disabled = true;
-                $('#pause-recording').disabled = false;
-                $('#stop-recording').disabled = false;
+                $('#pause-recording').prop('disabled', false);
+                $('#stop-recording').prop('disabled', false);
 
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             });
@@ -48,22 +50,22 @@
                 mediaRecorder.stop();
                 mediaRecorder.stream.stop();
 
-                $('#pause-recording').disabled = true;
-                $('#start-recording').disabled = false;
+                $('#pause-recording').prop('disabled', true);
+                $('#start-recording').prop('disabled', false);
             });
 
             $('#pause-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.pause();
 
-                $('#resume-recording').disabled = false;
+                $('#resume-recording').prop('disabled', false);
             });
 
             $('#resume-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.resume();
 
-                $('#pause-recording').disabled = false;
+                $('#pause-recording').prop('disabled', false);
             });
 
             $('#save-recording').click(function() {
@@ -88,8 +90,8 @@
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
-                mediaRecorder.mimeType = document.getElementById('audio-mimeType').value;
-                mediaRecorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
+                mediaRecorder.mimeType = audio/wav; /*document.getElementById('audio-mimeType').value;*/
+                mediaRecorder.audioChannels = 1; /*!!document.getElementById('left-channel').checked ? 1 : 2;*/
                 mediaRecorder.ondataavailable = function(blob) {
                     var a = document.createElement('a');
                     a.target = '_blank';
@@ -101,17 +103,19 @@
                     audiosContainer.appendChild(document.createElement('hr'));
                 };
 
-                var timeInterval = $('#time-interval').value;
+/*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
-                // get blob after specific time interval
+*/ 
+                var timeInterval = 5*1000;
+               // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
-                $('#stop-recording').disabled = false;
+/*                $('#stop-recording').disabled = false;
                 $('#pause-recording').disabled = false;
                 $('#save-recording').disabled = false;
-            }
+*/            }
 
             function onMediaError(e) {
                 console.error('media error', e);
@@ -136,7 +140,7 @@
             }
 
             window.onbeforeunload = function() {
-                $('#start-recording').disabled = false;
+                $('#start-recording').prop('disabled', false);
             };
     });
 
