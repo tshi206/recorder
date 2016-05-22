@@ -13,33 +13,33 @@
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             });
 
-            $('#stop-recording').onclick = function() {
+            $('#stop-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.stop();
                 mediaRecorder.stream.stop();
 
                 $('#pause-recording').disabled = true;
                 $('#start-recording').disabled = false;
-            };
+            });
 
-            $('#pause-recording').onclick = function() {
+            $('#pause-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.pause();
 
                 $('#resume-recording').disabled = false;
-            };
+            });
 
-            $('#resume-recording').onclick = function() {
+            $('#resume-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.resume();
 
                 $('#pause-recording').disabled = false;
-            };
+            });
 
-            $('#save-recording').onclick = function() {
+            $('#save-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.save();
-            };
+            });
 
             var mediaRecorder;
 
