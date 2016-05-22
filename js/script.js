@@ -164,7 +164,7 @@ ready(function() {
             window.onbeforeunload = function() {
                 document.getElementById('#start-recording').disabled = false;
             };
-});
+}, false );
 
 /*	});
 
