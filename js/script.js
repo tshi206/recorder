@@ -28,34 +28,79 @@
 		});
 */
 
-    var ready = function ( fn ) {
+(function(funcName, baseObj) {
+    // The public function name defaults to window.docReady
+    // but you can pass in your own object and own function name and those will be used
+    // if you want to put them in a different namespace
+    funcName = funcName || "docReady";
+    baseObj = baseObj || window;
+    var readyList = [];
+    var readyFired = false;
+    var readyEventHandlersInstalled = false;
 
-        // Sanity check
-        if ( typeof fn !== 'function' ) return;
-
-        // If document is already loaded, run method
-        if ( document.readyState === 'complete'  ) {
-            return fn();
+    // call this when the document is ready
+    // this function protects itself against being called more than once
+    function ready() {
+        if (!readyFired) {
+            // this must be set to true before we start calling callbacks
+            readyFired = true;
+            for (var i = 0; i < readyList.length; i++) {
+                // if a callback here happens to add new ready handlers,
+                // the docReady() function will see that it already fired
+                // and will schedule the callback to run right after
+                // this event loop finishes so all handlers will still execute
+                // in order and no new ones will be added to the readyList
+                // while we are processing the list
+                readyList[i].fn.call(window, readyList[i].ctx);
+            }
+            // allow any closures held by these functions to free
+            readyList = [];
         }
+    }
 
-        // Otherwise, wait until document is loaded
-        // The document has finished loading and the document has been parsed but sub-resources such as images, stylesheets and frames are still loading. The state indicates that the DOMContentLoaded event has been fired.
-        document.addEventListener( 'interactive', fn, false );
+    function readyStateChange() {
+        if ( document.readyState === "complete" ) {
+            ready();
+        }
+    }
 
-        // Alternative: The document and all sub-resources have finished loading. The state indicates that the load event has been fired.
-        // document.addEventListener( 'complete', fn, false );
+    // This is the one public interface
+    // docReady(fn, context);
+    // the context argument is optional - if present, it will be passed
+    // as an argument to the callback
+    baseObj[funcName] = function(callback, context) {
+        // if ready has already fired, then just schedule the callback
+        // to fire asynchronously, but right away
+        if (readyFired) {
+            setTimeout(function() {callback(context);}, 1);
+            return;
+        } else {
+            // add the function and context to the list
+            readyList.push({fn: callback, ctx: context});
+        }
+        // if document already ready to go, schedule the ready function to run
+        if (document.readyState === "complete") {
+            setTimeout(ready, 1);
+        } else if (!readyEventHandlersInstalled) {
+            // otherwise if we don't have event handlers installed, install them
+            if (document.addEventListener) {
+                // first choice is DOMContentLoaded event
+                document.addEventListener("DOMContentLoaded", ready, false);
+                // backup is window load event
+                window.addEventListener("load", ready, false);
+            } else {
+                // must be IE
+                document.attachEvent("onreadystatechange", readyStateChange);
+                window.attachEvent("onload", ready);
+            }
+            readyEventHandlersInstalled = true;
+        }
+    }
+})("docReady", window);
 
-    };
+docReady(function() {
+    // code here
 
-
-/*document.addEventListener( 'DOMContentLoaded', function () {
-
-}, false );
-*/
-// Example
-
-ready(function() {
-    // Do stuff...
             function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
                 navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
             }
@@ -167,6 +212,7 @@ ready(function() {
                 document.getElementById('#start-recording').disabled = false;
             };
 });
+
 /*	});
 
 })(jQuery, OC);
