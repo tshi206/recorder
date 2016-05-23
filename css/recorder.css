@@ -8,6 +8,9 @@
         width: 100%;
         margin: 0 0;
     }
+    .experiment {
+        padding-left: 30px;
+    }
     .canvasClass { 
         display: inline-block; 
         background: #202020; 

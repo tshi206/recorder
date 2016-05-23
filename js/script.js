@@ -85,8 +85,8 @@
                 });
                 audio.play();
 
-                audiosContainer.appendChild(audio);
-                audiosContainer.appendChild(document.createElement('hr'));
+                // audiosContainer.appendChild(audio);
+                // audiosContainer.appendChild(document.createElement('hr'));
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
