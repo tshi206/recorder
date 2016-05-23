@@ -39,8 +39,8 @@
 
             $('#start-recording').click(function() {
                 this.disabled = true;
-                $('#pause-recording').prop('disabled', false);
-                $('#stop-recording').prop('disabled', false);
+                // $('#pause-recording').prop('disabled', false);
+                // $('#stop-recording').prop('disabled', false);
 
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             });
