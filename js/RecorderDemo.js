@@ -2,7 +2,20 @@
 // (see dev-coffee branch for original source)
 
 // navigator.getUserMedia shim
+(function ($, OC) {
 
+    $(document).ready(function () {
+         $('#echo').click(function () {
+            var url = OC.generateUrl('/apps/recorder/echo');
+            var data = {
+                echo: $('#echo-content').val()
+            };
+
+            $.post(url, data).success(function (response) {
+                $('#echo-result').text(response.echo);
+            });
+
+        });
 navigator.getUserMedia =
   navigator.getUserMedia ||
   navigator.webkitGetUserMedia ||
@@ -372,3 +385,7 @@ audioRecorder.onError = function(recorder, message) {
     .html(message);
   $modalError.modal('show');
 };
+
+    });
+
+})(jQuery, OC);
