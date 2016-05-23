@@ -118,7 +118,7 @@ mixer.connect(audioContext.destination);
 
 // audio recorder object
 var audioRecorder = new WebAudioRecorder(mixer, {
-  workerDir: 'js/',
+  workerDir: '',
   onEncoderLoading: function(recorder, encoding) {
     $modalLoading
       .find('.modal-title')
