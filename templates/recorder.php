@@ -3,7 +3,7 @@
     <canvas id="wavedisplay" width="1024" height="500"></canvas>
   </div>
   <div id="controls">
-    <img id="record" src="img/mic128.png" >
+    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
     <a id="save" href="#"><img src="img/save.svg"></a>
   </div>
 

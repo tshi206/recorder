@@ -31,8 +31,6 @@ var recIndex = 0;
 - "Monitor input" switch
 */
 
-(function(window){
-    
 function saveAudio() {
     audioRecorder.exportWAV( doneEncoding );
     // could get mono instead by saying
