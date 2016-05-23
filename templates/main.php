@@ -1,7 +1,5 @@
 
 <?php
-style('recorder', 'style');
-style('recorder', 'recorder');
 
 /*script('recorder', 'script');
 script('recorder', 'bootstrap.min');
@@ -10,10 +8,21 @@ script('recorder', 'EncoderWorker');
 script('recorder', 'jquery.min');
 script('recorder', 'WavAudioEncoder.min');
 */
+/*
+//Media Stream Recorder
+style('recorder', 'style');
+style('recorder', 'recorder');
 
 script('recorder', 'gumadapter');
 script('recorder', 'MediaStreamRecorder');
-script('recorder', 'script');
+script('recorder', 'script');*/
+
+style('recorder', 'bootstrap.min');
+
+script('recorder', 'WebAudioRecorder.min');
+script('recorder', 'RecorderDemo');
+script('recorder', 'bootstrap.min');
+
 
 //script('recorder', 'demo');
 

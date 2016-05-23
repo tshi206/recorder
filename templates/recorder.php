@@ -1,41 +1,6 @@
-
-        <section class="experiment">
-<!--             <label for="time-interval">Time Interval (milliseconds):</label>
-            <input type="text" id="time-interval" value="5000">ms
-
- -->            <br>
-
-<!--             <select id="audio-mimeType">
-                <option>audio/webm</option>
-                <option>audio/wav</option>
-            </select>
- -->
-            <button id="start-recording">Start</button>
-            <button id="stop-recording" disabled>Stop</button>
-
-            <button id="pause-recording" disabled>Pause</button>
-            <button id="resume-recording" disabled>Resume</button>
-
-            <button id="save-recording" disabled>Save</button>
-
-            <br>
-            <br>
-
-<!--             <input id="left-channel" type="checkbox" checked>
-            <label for="left-channel">Only Left Channel?</label>
-
- -->	    <button id="hello">Hello</button>
-        </section>
-
-        <section class="experiment">
-            <div id="audios-container"></div>
-        </section>
-
-
-<!-- 
     <div class="container">
-      <h1><a href="https://github.com/higuma/wav-audio-encoder-js">WavAudioEncoder.js</a> demo</h1>
-      <p>Audio recording to Waveform Audio (.wav) test with Web Audio API</p>
+      <h1><a href="https://github.com/higuma/web-audio-recorder-js">WebAudioRecorder.js</a> demo</h1>
+      <p>Audio recording to WAV/OGG/MP3 with Web Audio API</p>
       <hr>
       <div class="form-horizontal">
         <div class="form-group">
@@ -55,22 +20,41 @@
           </div>
         </div><br>
         <div class="form-group">
+          <label class="col-sm-3 control-label">Recording time limit</label>
+          <div class="col-sm-2">
+            <input id="time-limit" type="range" min="1" max="10" value="3">
+          </div>
+          <div id="time-limit-text" class="col-sm-7">3 minutes</div>
+        </div><br>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Encoding</label>
+          <div class="col-sm-3">
+            <input type="radio" name="encoding" encoding="wav" checked> .wav &nbsp; 
+            <input type="radio" name="encoding" encoding="ogg"> .ogg &nbsp; 
+            <input type="radio" name="encoding" encoding="mp3"> .mp3
+          </div>
+          <label id="encoding-option-label" class="col-sm-2 control-label"></label>
+          <div class="col-sm-2">
+            <input id="encoding-option" type="range" min="0" max="11" value="6" class="hidden">
+          </div>
+          <div id="encoding-option-text" class="col-sm-2"></div>
+        </div><br>
+        <div class="form-group">
           <label class="col-sm-3 control-label">Encoding process</label>
           <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="separate" checked> Encode with worker after recording (safer)
+            <input type="radio" name="encoding-process" mode="background" checked> Encode on recording background
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-3"></div>
-          <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="background"> Encode with worker on recording background (intermediate)
+          <div class="col-sm-3">
+            <input type="radio" name="encoding-process" mode="separate"> Encode after recording (safer)
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="direct"> Encode on recoring directly without worker (risky)
+          <label id="report-interval-label" class="col-sm-2 control-label hidden">Reports every</label>
+          <div class="col-sm-2">
+            <input id="report-interval" type="range" min="1" max="5" value="1" class="hidden">
           </div>
+          <div id="report-interval-text" class="col-sm-2 hidden">1 second</div>
         </div><br>
         <div class="form-group">
           <label class="col-sm-3 control-label">Recording buffer size</label>
@@ -96,4 +80,46 @@
       <h3>Recordings</h3>
       <div id="recording-list"></div>
     </div>
- -->
+    <div id="modal-loading" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal-progress" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <div class="progress">
+              <div style="width: 0%;" class="progress-bar"></div>
+            </div>
+            <div class="text-center">0%</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal-error" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">&times;</button>
+            <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
