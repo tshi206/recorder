@@ -8,7 +8,7 @@
         width: 100%;
         margin: 0 0;
     }
-    canvas { 
+    .canvasClass { 
         display: inline-block; 
         background: #202020; 
         width: 95%;

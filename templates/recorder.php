@@ -6,8 +6,8 @@
 <button id = "record" onclick="toggleRecording(this);">Record</button>
 <a id="save" href="#"><button>Save</button></a>
   <div id="viz">
-    <canvas id="analyser" width="1024" height="500"></canvas>
-    <canvas id="wavedisplay" width="1024" height="500"></canvas>
+    <canvas class="canvasClass" id="analyser" width="1024" height="500"></canvas>
+    <canvas class="canvasClass" id="wavedisplay" width="1024" height="500"></canvas>
   </div>
   
         <!-- <section class="experiment"> -->
