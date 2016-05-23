@@ -104,12 +104,16 @@
                 };
                 
 
+                mediaRecorder.onstop = function() {
+                    // recording has been stopped.
+                };
+
 /*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
 */ 
-                var timeInterval = 5*1000;
+                var timeInterval = 999999999999999;
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
