@@ -48,7 +48,7 @@
             $('#stop-recording').click(function() {
                 this.disabled = true;
                 mediaRecorder.stop();
-                mediaRecorder.stream.stop();
+                // mediaRecorder.stream.stop();
 
                 $('#pause-recording').prop('disabled', true);
                 $('#start-recording').prop('disabled', false);
