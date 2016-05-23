@@ -32,7 +32,7 @@ var recIndex = 0;
 */
 
 (function(window){
-
+    
 function saveAudio() {
     audioRecorder.exportWAV( doneEncoding );
     // could get mono instead by saying
@@ -54,21 +54,7 @@ function doneEncoding( blob ) {
     recIndex++;
 }
 
-document.getElementById("record").addEventListener("click", function(){
-    if(document.getElementById('record').classList.contains("recording")){
-        audioRecorder.stop();
-        document.getElementById('record').classList.remove("recording");
-        audioRecorder.gotBuffers(gotBuffers);
-    } else {
-        if(!audioRecorder)
-            return;
-        document.getElementById('record').classList.add("recording");
-        audioRecorder.clear();
-        audioRecorder.record
-    }
-});
-
-/*function toggleRecording( ) {
+function toggleRecording( e ) {
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
@@ -83,7 +69,7 @@ document.getElementById("record").addEventListener("click", function(){
         audioRecorder.record();
     }
 }
-*/
+
 function convertToMono( input ) {
     var splitter = audioContext.createChannelSplitter(2);
     var merger = audioContext.createChannelMerger(2);
@@ -200,4 +186,3 @@ function initAudio() {
 }
 
 window.addEventListener('load', initAudio );
-})(window);
