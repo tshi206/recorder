@@ -1,12 +1,15 @@
-<div id="viz">
+<!-- 
+<div id="controls">
+    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
+    <a id="save" href="#"><img src="img/save.svg"></a>
+  </div> -->
+<button id = "record" onclick="toggleRecording(this);">Record</button>
+<a id="save" href="#"><button>Save</button></a>
+  <div id="viz">
     <canvas id="analyser" width="1024" height="500"></canvas>
     <canvas id="wavedisplay" width="1024" height="500"></canvas>
   </div>
-  <div id="controls">
-    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
-    <a id="save" href="#"><img src="img/save.svg"></a>
-  </div>
-
+  
         <!-- <section class="experiment"> -->
 <!--             <label for="time-interval">Time Interval (milliseconds):</label>
             <input type="text" id="time-interval" value="5000">ms
