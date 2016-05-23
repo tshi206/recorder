@@ -79,7 +79,7 @@
                 var audio = document.createElement('audio');
 
                 audio = mergeProps(audio, {
-                    controls: true,
+                    controls: false,
                     muted: true,
                     src: URL.createObjectURL(stream)
                 });
@@ -92,28 +92,28 @@
                 mediaRecorder.stream = stream;
                 mediaRecorder.mimeType = 'audio/wav'; /*document.getElementById('audio-mimeType').value;*/
                 mediaRecorder.audioChannels = 1; /*!!document.getElementById('left-channel').checked ? 1 : 2;*/
-                mediaRecorder.ondataavailable = function(blob) {
-                    var a = document.createElement('a');
-                    a.target = '_blank';
-                    a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ') Time Length: ' + getTimeLength(timeInterval);
+                // mediaRecorder.ondataavailable = function(blob) {
+                //     var a = document.createElement('a');
+                //     a.target = '_blank';
+                //     a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + bytesToSize(blob.size) + ') Time Length: ' + getTimeLength(timeInterval);
 
-                    a.href = URL.createObjectURL(blob);
+                //     a.href = URL.createObjectURL(blob);
 
-                    audiosContainer.appendChild(a);
-                    audiosContainer.appendChild(document.createElement('hr'));
-                };
+                //     audiosContainer.appendChild(a);
+                //     audiosContainer.appendChild(document.createElement('hr'));
+                // };
                 
 
-                mediaRecorder.onstop = function() {
-                    // recording has been stopped.
-                };
+                // mediaRecorder.onstop = function() {
+                //     // recording has been stopped.
+                // };
 
 /*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
 */ 
-                var timeInterval = 999999999999999;
+                var timeInterval = 1000;
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
