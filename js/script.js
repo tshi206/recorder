@@ -36,7 +36,7 @@
             };
 
             // var pauseRecording = $('#pause-recording');
-
+            $('#start-recording').prop('disabled',false);
             $('#start-recording').click(function() {
                 this.disabled = true;
                 // $('#pause-recording').prop('disabled', false);
@@ -102,6 +102,7 @@
                     audiosContainer.appendChild(a);
                     audiosContainer.appendChild(document.createElement('hr'));
                 };
+                
 
 /*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
@@ -139,9 +140,6 @@
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
 
-            window.onbeforeunload = function() {
-                $('#start-recording').prop('disabled', false);
-            };
     });
 
 })(jQuery, OC);
