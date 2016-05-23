@@ -1,27 +1,16 @@
-<!-- 
-<div id="controls">
-    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
-    <a id="save" href="#"><img src="img/save.svg"></a>
-  </div> -->
-<button id = "record" onclick="toggleRecording(this);">Record</button>
-<a id="save" href="#"><button>Save</button></a>
-  <div id="viz">
-    <canvas class="canvasClass" id="analyser" width="1024" height="500"></canvas>
-    <canvas class="canvasClass" id="wavedisplay" width="1024" height="500"></canvas>
-  </div>
-  
-        <!-- <section class="experiment"> -->
+
+        <section class="experiment">
 <!--             <label for="time-interval">Time Interval (milliseconds):</label>
             <input type="text" id="time-interval" value="5000">ms
 
- -->            
- <!-- <br> -->
+ -->            <br>
+
 <!--             <select id="audio-mimeType">
                 <option>audio/webm</option>
                 <option>audio/wav</option>
             </select>
  -->
-      <!--       <button id="start-recording">Start</button>
+            <button id="start-recording">Start</button>
             <button id="stop-recording" disabled>Stop</button>
 
             <button id="pause-recording" disabled>Pause</button>
@@ -31,18 +20,17 @@
 
             <br>
             <br>
- -->
+
 <!--             <input id="left-channel" type="checkbox" checked>
             <label for="left-channel">Only Left Channel?</label>
 
- -->	 
- <!--    <button id="hello">Hello</button>
+ -->	    <button id="hello">Hello</button>
         </section>
 
         <section class="experiment">
             <div id="audios-container"></div>
         </section>
- -->
+
 
 <!-- 
     <div class="container">
