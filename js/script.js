@@ -109,10 +109,10 @@
                 // };
                 
 
-                mediaRecorder.onstop = function(blob) {
-                    // recording has been stopped.
-                    a.href = URL.createObjectURL(blob);
-                };
+                // mediaRecorder.onstop = function(blob) {
+                //     // recording has been stopped.
+                //     a.href = URL.createObjectURL(blob);
+                // };
 
 /*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
