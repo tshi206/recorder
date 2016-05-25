@@ -119,7 +119,7 @@
                 else timeInterval = 5 * 1000;
 
 */ 
-                var timeInterval = 1000;
+                var timeInterval = 60000;
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
