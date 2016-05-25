@@ -18,6 +18,8 @@
 
             <button id="save-recording" disabled>Save</button>
             <br>
+            <br>
+
             <span id="sw_h">00</span>:
             <span id="sw_m">00</span>:
             <span id="sw_s">00</span>:

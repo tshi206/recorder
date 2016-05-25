@@ -41,6 +41,11 @@
                 this.disabled = true;
                 // $('#pause-recording').prop('disabled', false);
                 // $('#stop-recording').prop('disabled', false);
+                var count = 0;
+                var timer = $.timer(function() {
+                    $('#counter').html(++count);
+                });
+                timer.set({ time : 1000, autostart : true });
 
                 captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
             });
@@ -104,16 +109,17 @@
                 // };
                 
 
-                // mediaRecorder.onstop = function() {
-                //     // recording has been stopped.
-                // };
+                mediaRecorder.onstop = function(blob) {
+                    // recording has been stopped.
+                    a.href = URL.createObjectURL(blob);
+                };
 
 /*                var timeInterval = $('#time-interval').value;
                 if (timeInterval) timeInterval = parseInt(timeInterval);
                 else timeInterval = 5 * 1000;
 
 */ 
-                var timeInterval = 1000;
+                var timeInterval = 999999999999999999;
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
@@ -144,6 +150,10 @@
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
 
+
+    /******** Stop Watch *******/
+
+    
     });
 
 })(jQuery, OC);
