@@ -17,6 +17,11 @@
             <button id="resume-recording" disabled>Resume</button>
 
             <button id="save-recording" disabled>Save</button>
+            <br>
+            <span id="sw_h">00</span>:
+            <span id="sw_m">00</span>:
+            <span id="sw_s">00</span>:
+            <span id="sw_ms">00</span>
 
             <br>
             <br>
@@ -24,7 +29,8 @@
 <!--             <input id="left-channel" type="checkbox" checked>
             <label for="left-channel">Only Left Channel?</label>
 
- -->	    <button id="hello">Hello</button>
+ -->	   
+  <!-- <button id="hello">Hello</button> -->
         </section>
 
         <section class="experiment">
