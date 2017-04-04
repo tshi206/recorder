@@ -2,9 +2,9 @@
 <info>
     <id>recorder</id>
     <name>Recorder</name>
-    <description>My first ownCloud app</description>
+    <description>This application enables users to record their voice and download the recording to their computer. In the context of VoNZ project, users have to choose a type of recording and set the recording content. In addition they can download their recordings into the server</description>
     <licence>AGPL</licence>
-    <author>Shawn</author>
+    <author>Shawn,Daugieras</author>
     <version>0.0.1</version>
     <namespace>Recorder</namespace>
     <category>other</category>
