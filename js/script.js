@@ -4,136 +4,217 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author Shawn <syu702@aucklanduni.ac.nz>
- * @copyright Shawn 2016
+ * @author Shawn <syu702@aucklanduni.ac.nz>, A.Daugieras <adau828@aucklanduni.ac.nz>
+ * @copyright Shawn,Daugieras 2017
  */
 
 (function ($, OC) {
 
     $(document).ready(function () {
-        $('#hello').click(function () {
-            alert('Hello from your script file');
-        });
 
-        $('#echo').click(function () {
-            var url = OC.generateUrl('/apps/recorder/echo');
-            var data = {
-                echo: $('#echo-content').val()
-            };
+	var mediaConstraints = {
+                audio: true
+        };	
+	var mediaRecorder;
+        var timeInterval = 10000; //timeInterval by default, type = word
+        var audiosContainer = document.getElementById('audios-container');
+        var index = 1;
+	var i= 0;
+	var chunks =[]; 
+	var currentBlob;
+	var initialURL ='https://130.216.118.226/index.php/s/lkYnpGiNx1FofK8'; //by default, type = word
+	var fileName;
+	var tokens =[];
 
-            $.post(url, data).success(function (response) {
-                $('#echo-result').text(response.echo);
+	var Clock = {
+	totalSeconds: 0,
+	start: function () {
+	    var self = this;
+		self.totalSeconds = 0;
+	    function pad(val) { return val > 9 ? val : "0" + val; }
+	    this.interval = setInterval(function () {
+		self.totalSeconds += 1;
+		$("#sw_m").text(pad(Math.floor(self.totalSeconds / 60 % 60)));
+		$("#sw_s").text(pad(parseInt(self.totalSeconds % 60)));
+	    }, 1000);
+	},
+	stop: function () {
+	    clearInterval(this.interval);
+	    delete this.interval;
+	}
+	};
+
+            $('#start-recording').click(function() {
+                this.disabled = true;
+                $('#stop-recording').prop('disabled', false);
+		$('#save-recording').prop('disabled',true);
+		$('#listen-recording').prop('disabled',true);
+
+		edgeNotice.innerHTML = "";
+		edgeNotice2.innerHTML = "";
+		currentBlob = null;
+
+		typeChoice(document.getElementById('type').options.selectedIndex); //to define the timeInterval
+		Clock.start();
+                captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);	
             });
 
-        });
+            $('#stop-recording').click(function() {
+                this.disabled = true;
+                $('#start-recording').prop('disabled', false);
+		$('#save-recording').prop('disabled',false);
+		$('#listen-recording').prop('disabled',false);
+
+		Clock.stop(); 
+		mediaRecorder.stop();
+		if (!IsChrome) {
+                        mediaRecorder.stream.stop();
+                }
+            });
+
+	    //Always save before recording to align Chrome on Mozilla behaviors
+            $('#listen-recording').click(function() {
+
+		if(document.getElementById("name").value !=""){
+		        this.disabled = true;
+			document.getElementById("myPopup").classList.remove("show");
+
+			tokens = document.getElementById("name").value.split(" ");
+			typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
+
+		        var timeStamp = new Date();
+		        var secondStamp = timeStamp.getDate() + "-"
+		                            + (timeStamp.getMonth() + 1) + "-"
+		                            + timeStamp.getFullYear() + "_"
+		                            + timeStamp.getHours() + "-"
+		                            + timeStamp.getMinutes() + "-"
+		                            + timeStamp.getSeconds();
+			
+			//create a blob for the text
+			var textToWrite = document.getElementById('name').value;
+			var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
+
+			//download text and audio
+			mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName,textFileAsBlob);
+			mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName);
+		}
+		else{document.getElementById("myPopup").classList.toggle("show");}
+            });
+
+            $('#save-recording').click(function() {
+
+
+		if(document.getElementById("listen-recording").disabled == true){
+
+			document.getElementById("myPopup2").classList.remove("show");
+			showwindows('fenetre_alert');
+		}
+		else{document.getElementById("myPopup2").classList.toggle("show");}
+            });
+
+	    $('#done').click(function() {
+		hidewindows('fenetre_alert');
+		typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
+		window.open(initialURL);
+	    });
+
+
+	    function showwindows(id) {
+	    document.getElementById(id).style.visibility = 'visible';
+	    }
+	    function hidewindows(id) {
+	    document.getElementById(id).style.visibility = 'hidden';
+	    }
+
+
+	    //Assign differents values in function of recording type
+	    function typeChoice(option){
+		switch(option) {
+		case 0:
+			timeInterval = 10000; //for word
+	 		initialURL = 'https://130.216.118.226/index.php/s/lkYnpGiNx1FofK8';
+			fileName = tokens[0];
+			break;
+		case 1:
+			timeInterval = 30000; //for list of word
+	 		initialURL = 'https://130.216.118.226/index.php/s/pgI8mGvOQ3ClSiM';
+			fileName = tokens[0];
+			break;
+		case 2:
+			timeInterval = 30000; //for short phrases
+	 		initialURL = 'https://130.216.118.226/index.php/s/62THd7XecVySSUb';
+			fileName = tokens[2];
+			break;
+		case 3:
+			timeInterval = 60000; //for sentences
+	 		initialURL = 'https://130.216.118.226/index.php/s/62THd7XecVySSUb';
+			fileName = tokens[1];
+			break;
+		case 4:
+			timeInterval = 60000; //for other
+	 		initialURL = 'https://130.216.118.226/index.php/s/RQBr90wedMXcu5b';
+			fileName = tokens[0];
+			break;
+		}
+	    }
 
             function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
                 navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
             }
 
-            var mediaConstraints = {
-                audio: true
-            };
-
-            // var pauseRecording = $('#pause-recording');
-            $('#start-recording').prop('disabled',false);
-            $('#start-recording').click(function() {
-                this.disabled = true;
-                // $('#pause-recording').prop('disabled', false);
-                // $('#stop-recording').prop('disabled', false);
-                // var count = 0;
-                // var timer = $.timer(function() {
-                //     $('#counter').html(++count);
-                // });
-                // timer.set({ time : 1000, autostart : true });
-
-                captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-            });
-
-            $('#stop-recording').click(function() {
-                this.disabled = true;
-                mediaRecorder.stop();
-                // mediaRecorder.stream.stop();
-
-                $('#pause-recording').prop('disabled', true);
-                $('#start-recording').prop('disabled', false);
-            });
-
-            $('#pause-recording').click(function() {
-                this.disabled = true;
-                mediaRecorder.pause();
-
-                $('#resume-recording').prop('disabled', false);
-            });
-
-            $('#resume-recording').click(function() {
-                this.disabled = true;
-                mediaRecorder.resume();
-
-                $('#pause-recording').prop('disabled', false);
-            });
-
-            $('#save-recording').click(function() {
-                this.disabled = true;
-                mediaRecorder.save();
-            });
-
-            var mediaRecorder;
-
             function onMediaSuccess(stream) {
-                var audio = document.createElement('audio');
-
-                audio = mergeProps(audio, {
-                    controls: true,
-                    muted: true,
-                    src: URL.createObjectURL(stream)
-                });
-                audio.play();
-
-                audiosContainer.appendChild(audio);
-                audiosContainer.appendChild(document.createElement('hr'));
 
                 mediaRecorder = new MediaStreamRecorder(stream);
                 mediaRecorder.stream = stream;
-                mediaRecorder.mimeType = 'audio/wav'; /*document.getElementById('audio-mimeType').value;*/
-                mediaRecorder.audioChannels = 1; /*!!document.getElementById('left-channel').checked ? 1 : 2;*/
+                mediaRecorder.mimeType = 'audio/wav';
+                mediaRecorder.audioChannels = 1;
                 mediaRecorder.ondataavailable = function(blob) {
-                    var a = document.createElement('a');
-                    a.target = '_blank';
-                    a.innerHTML = 'Audio Recorded ' + (index++) + ' Size: ' + bytesToSize(blob.size) + ' Time Length: ' + getTimeLength(timeInterval);
 
-                    a.href = URL.createObjectURL(blob);
+		//Stop the recording if the time interval was exceed and the stop button was not press
+		mediaRecorder.stop();
+		if (!IsChrome) {
+                        mediaRecorder.stream.stop();
+                }
 
-                    audiosContainer.appendChild(a);
-                    audiosContainer.appendChild(document.createElement('hr'));
-                };
-                
+     		if (Clock.totalSeconds*1000 == timeInterval){
+		$('#start-recording').prop('disabled', false);
+		$('#stop-recording').prop('disabled',true);
+		
+		Clock.stop();
+		edgeNotice2.innerHTML = "Unsuccessfully recorded!";
+		alert("Your recording is too long, modify the type of recording or try again !");	
+		}
+		else {
 
-                // mediaRecorder.onstop = function(blob) {
-                //     // recording has been stopped.
-                //     a.href = URL.createObjectURL(blob);
-                // };
+       		var blobURL = URL.createObjectURL(blob);
+		currentBlob = blob;
+	
+		edgeNotice.innerHTML = "Successfully recorded!";
+	  
+		var a = document.createElement('a');
+		a.target = '_blank';
+		a.innerHTML = 'Audio Recorded ' + (index++) + '| Size: ' + bytesToSize(blob.size) + '| Time Length: ' + getTimeLength(Clock.totalSeconds*1000);
 
-/*                var timeInterval = $('#time-interval').value;
-                if (timeInterval) timeInterval = parseInt(timeInterval);
-                else timeInterval = 5 * 1000;
+		a.href = blobURL;
 
-*/ 
-                var timeInterval = 60000;
+		audiosContainer.appendChild(document.createElement('hr'));
+		audiosContainer.appendChild(a);
+		audiosContainer.appendChild(document.createElement('hr'));
+		}
+
+	 	};
+
                // get blob after specific time interval
                 mediaRecorder.start(timeInterval);
 
                 $('#stop-recording').prop('disabled', false);
-                $('#pause-recording').prop('disabled', false);
-                $('#save-recording').prop('disabled', false);
+                $('#save-recording').prop('disabled', true);
+		$('#listen-recording').prop('disabled',true);
             }
 
             function onMediaError(e) {
                 console.error('media error', e);
             }
-
-            var audiosContainer = document.getElementById('audios-container');
-            var index = 1;
 
             // below function via: http://goo.gl/B3ae8c
             function bytesToSize(bytes) {
@@ -149,11 +230,20 @@
                 var data = new Date(milliseconds);
                 return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
             }
+    	   /******** Stop Watch *******/
 
+	    //below fonction from steamproc
+	    function xhr(url, data,initialURL, callback) {
+	        var request = new XMLHttpRequest();
+	        request.onreadystatechange = function () {
+		    if (request.readyState == 4 && request.status == 200) {
+		        callback(initialURL);
+		    }
+	        };
+	        request.open('POST', url);
+	        request.send(data);
+	    }
 
-    /******** Stop Watch *******/
-
-    
     });
 
 })(jQuery, OC);

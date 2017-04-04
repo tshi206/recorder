@@ -1,4 +1,4 @@
-// Last time updated: 2016-05-05 6:31:59 AM UTC
+// Last time updated: 2017-04-04 3:28 AM UTC by VoNZproject
 
 // links:
 // Open-Sourced: https://github.com/streamproc/MediaStreamRecorder
@@ -100,7 +100,8 @@ function MediaStreamRecorder(mediaStream) {
         console.warn('stopped..', error);
     };
 
-    this.save = function(file, fileName) {
+//Changes for need of VoNZproject => inversion fileName and file in function attributes
+    this.save = function(fileName, file) {
         if (!file) {
             if (!mediaRecorder) {
                 return;
@@ -110,7 +111,7 @@ function MediaStreamRecorder(mediaStream) {
                 type: mediaRecorder.blobs[0].type || this.mimeType
             });
 
-            invokeSaveAsDialog(bigBlob);
+            invokeSaveAsDialog(bigBlob,fileName);
             return;
         }
         invokeSaveAsDialog(file, fileName);
@@ -494,7 +495,13 @@ function invokeSaveAsDialog(file, fileName) {
         fileExtension = splitted[1];
     }
 
-    var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.' + fileExtension;
+    //Changes for need of VonZ project
+    //add specific fileExtension for text
+    if(fileExtension == 'plain'){
+	fileExtension = 'txt';
+    }
+
+    var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.'+ fileExtension;
 
     if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
         return navigator.msSaveOrOpenBlob(file, fileFullName);
