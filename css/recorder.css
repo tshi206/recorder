@@ -1,7 +1,7 @@
     html { overflow: hidden; }
     body { 
-        font: 14pt Arial, sans-serif; 
-        background: lightgrey;
+        font-size : 14px; 
+        background-color: rgb(255, 240, 213);
         display: flex;
         flex-direction: column;
         height: 100vh;
@@ -9,6 +9,7 @@
         margin: 0 0;
     }
     .experiment {
+	text-align : center;
         padding-left: 30px;
     }
     .canvasClass { 
@@ -18,6 +19,33 @@
         height: 45%;
         box-shadow: 0px 0px 10px blue;
     }
+    .popuptext {
+	visibility: hidden;
+	display: inline-block;
+	color: #fff;
+	background-color: #555;
+	width: 160px;
+	border-radius: 6px;
+	padding: 8px 2px;
+	position: relative;
+	z-index: 1;
+	top: 20px;
+    }
+    .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    }
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
     #controls {
         display: flex;
         flex-direction: row;
@@ -49,3 +77,24 @@
         #controls { flex-direction: column; height: 100%; width: 10%;}
         #viz { height: 100%; width: 90%;}
     }
+    #app-navigation {
+	font-size: 14px;
+    }
+
+#fenetre_alert
+{
+    margin: auto;
+    text-align: center;
+    width: 50%; /*juste à titre d'exemple*/
+    height: 22%;
+    background-color: lightgrey;
+    font-weight: bold;
+    font-color; white;
+    visibility: hidden; /*partie importante: cacher la div et son contenu*/
+    z-index: 9999; /*partie importante: à l'affichage, la div sera au-dessus de tout le reste*/
+    position: fixed; /*à titre d'exemple également*/
+    bottom: 50%;
+    left: 40%;
+    border: 2px solid;
+    border-radius: 5px;
+}
