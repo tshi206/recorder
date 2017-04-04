@@ -1,107 +1,61 @@
+<section id="recorder" class="experiment">
+        <br>
 
-        <section class="experiment">
-<!--             <label for="time-interval">Time Interval (milliseconds):</label>
-            <input type="text" id="time-interval" value="5000">ms
+	<label>Choose the type of recording : </label>
+		<select class="form-control" id="type" name="save1">
+		      <option value="word" <?php if (($_['type']) == 'word') echo ' selected="selected"'; ?>>word</option>
+		      <option value="listword" <?php if (($_['type']) == 'listword') echo ' selected="selected"'; ?>>list of words (&lt;20 words)</option>
+		      <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>> short sentence (&gt;3 words)</option>
+		      <option value="sentence" <?php if (($_['type']) == 'sentence') echo ' selected="selected"'; ?>>sentence</option>
+		      <option value="other" <?php if (($_['type']) == 'other') echo ' selected="selected"'; ?>>other</option>
+		</select>
+	<br>
+	<br>
 
- -->            <br>
+	<label>Enter the text that you want to record :</label>
 
-<!--             <select id="audio-mimeType">
-                <option>audio/webm</option>
-                <option>audio/wav</option>
-            </select>
- -->
-            <button id="start-recording">Start</button>
-            <button id="stop-recording" disabled>Stop</button>
+	<br>
+	<br>
 
-            <button id="pause-recording" disabled>Pause</button>
-            <button id="resume-recording" disabled>Resume</button>
+	<textarea id="name" name="save2" placeholder="ex: Ko toku kupu i konei" value = ""></textarea>
 
-            <button id="save-recording" disabled>Save</button>
-            <br>
-            <br>
+	<br>
+	<br>
 
-            <span id="sw_h">00</span>:
-            <span id="sw_m">00</span>:
-            <span id="sw_s">00</span>:
-            <span id="sw_ms">00</span>
+	<button id="start-recording">Start</button>
+        <button id="stop-recording" disabled>Stop</button>
 
-            <br>
-            <br>
+	<br>  <!--allow to align popup with their button -->
+	<span id= "myPopup" class = "popuptext">Please fill the textarea before download it !</span>
+        <button style="height:50px;width:150px" id="listen-recording" disabled>Download on computer and Listen</button>	
+	<button style="height:50px;width:150px" id="save-recording" disabled>Download on the server</button>
+	<span id= "myPopup2" class = "popuptext">Please download the file on your computer first to put it on the server !</span>
 
-<!--             <input id="left-channel" type="checkbox" checked>
-            <label for="left-channel">Only Left Channel?</label>
+        <br>
+        <br>
 
- -->	   
-  <!-- <button id="hello">Hello</button> -->
-        </section>
+ <!-- Allow to write the time during the recording -->
+        <span id="sw_m">00</span>:
+        <span id="sw_s">00</span>
 
-        <section class="experiment">
-            <div id="audios-container"></div>
-        </section>
+</section>
 
+<section class="experiment">
+	<div id="audios-container"></div>
+	<br>
+	<label id ="edgeNotice" style ="color:green;"></label>
+	<br>
+	<label id ="edgeNotice2" style ="color:red;"></label>
+</section> 
 
-<!-- 
-    <div class="container">
-      <h1><a href="https://github.com/higuma/wav-audio-encoder-js">WavAudioEncoder.js</a> demo</h1>
-      <p>Audio recording to Waveform Audio (.wav) test with Web Audio API</p>
-      <hr>
-      <div class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Audio input</label>
-          <div class="col-sm-2">Test tone</div>
-          <div class="col-sm-3">
-            <input id="test-tone-level" type="range" min="0" max="100" value="0">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-2">
-            <input id="microphone" type="checkbox"> Microphone
-          </div>
-          <div class="col-sm-3">
-            <input id="microphone-level" type="range" min="0" max="100" value="0" class="hidden">
-          </div>
-        </div><br>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Encoding process</label>
-          <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="separate" checked> Encode with worker after recording (safer)
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="background"> Encode with worker on recording background (intermediate)
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9">
-            <input type="radio" name="encoding-process" mode="direct"> Encode on recoring directly without worker (risky)
-          </div>
-        </div><br>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Recording buffer size</label>
-          <div class="col-sm-2">
-            <input id="buffer-size" type="range" min="0" max="6">
-          </div>
-          <div id="buffer-size-text" class="col-sm-7"></div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9 text-warning"><strong>Warning: </strong><span>setting size below browser default may fail recording.</span></div>
-        </div><br>
-        <div class="form-group">
-          <div class="col-sm-3 control-label"><span id="recording" class="text-danger hidden"><strong>RECORDING</strong></span>&nbsp; <span id="time-display">00:00</span></div>
-          <div class="col-sm-3">
-            <button id="record" class="btn btn-danger">RECORD</button>
-            <button id="cancel" class="btn btn-default hidden">CANCEL</button>
-          </div>
-          <div class="col-sm-6"><span id="date-time" class="text-info"></span></div>
-        </div>
-      </div>
-      <hr>
-      <h3>Recordings</h3>
-      <div id="recording-list"></div>
-    </div>
- -->
+<div id="userID" class="hidden">
+	<textarea id ="user"><?php p($_['user']); ?></textarea>
+</div>
+
+<div id="fenetre_alert">
+	<label style ="color:black;">Thanks to contribute to VoNZ project !<br>You just have to upload your files (WAV + TXT) in the followed folder.</label>
+	<br>
+	<label style ="color:red;">Please do NOT rename your files before upload it !<br> Files name has to be 'IDUSER_DATE_TIME_1WORD'.</label>
+	<br>
+	<button id="done">OK</button>
+</div>
