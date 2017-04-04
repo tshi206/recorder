@@ -1,6 +1,6 @@
 # Recorder
 
-Recorder is an application to record users and implement a database with NZ english and Maori languages.
+Recorder is an application to record users through owncloud and implement a database with NZ english and Maori languages.
 
 ## Installation
 
