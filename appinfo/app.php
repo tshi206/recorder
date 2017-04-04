@@ -5,8 +5,8 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author Shawn <syu702@aucklanduni.ac.nz>
- * @copyright Shawn 2016
+ * @author Shawn <syu702@aucklanduni.ac.nz>, Daugieras <adau828@aucklanduni.ac.nz>
+ * @copyright Shawn,Daugieras 2017
  */
 
 namespace OCA\Recorder\AppInfo;
@@ -28,7 +28,7 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 		'order' => 10,
 
 		// the route that will be shown on startup
-		'href' => $urlGenerator->linkToRoute('recorder.page.index'),
+		'href' => $urlGenerator->linkToRoute('recorder.settings.getUserValue'),
 
 		// the icon that will be shown in the navigation
 		// this file needs to exist in img/

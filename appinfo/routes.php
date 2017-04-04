@@ -5,8 +5,8 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author Shawn <syu702@aucklanduni.ac.nz>
- * @copyright Shawn 2016
+ * @author Shawn <syu702@aucklanduni.ac.nz>, Daugieras <adau828@aucklanduni.ac.nz>
+ * @copyright Shawn,Daugieras 2017
  */
 
 /**
@@ -19,7 +19,7 @@
  */
 return [
     'routes' => [
-	   ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-	   ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
+	   ['name' => 'settings#getUserValue', 'url' => '/settings', 'verb' => 'GET'],
+           ['name' => 'settings#setRecorder', 'url' => '/settings', 'verb' => 'POST'],
     ]
 ];
