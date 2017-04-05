@@ -27,8 +27,8 @@
 
 	<br>  <!--allow to align popup with their button -->
 	<span id= "myPopup" class = "popuptext">Please fill the textarea before download it !</span>
-        <button style="height:50px;width:150px" id="listen-recording" disabled>Download on computer and Listen</button>	
-	<button style="height:50px;width:150px" id="save-recording" disabled>Download on the server</button>
+        <button style="height:50px;width:150px" id="listen-recording" disabled>Download audio+txt and Listen</button>	
+	<button style="height:50px;width:150px" id="save-recording" disabled>Contribute to VoNZ project</button>
 	<span id= "myPopup2" class = "popuptext">Please download the file on your computer first to put it on the server !</span>
 
         <br>
@@ -53,9 +53,13 @@
 </div>
 
 <div id="fenetre_alert">
-	<label style ="color:black;">Thanks to contribute to VoNZ project !<br>You just have to upload your files (WAV + TXT) in the followed folder.</label>
+	<label style ="color:black;">Click in 
+<a target="_blank">
+	<button><img src="<?php print_unescaped(OCP\Util::imagePath('recorder', 'add.svg')); ?>" style="height:30px"/></button>
+</a>
+in the next page to upload your files (WAV + TXT) in the database.</label>
 	<br>
-	<label style ="color:red;">Please do NOT rename your files before upload it !<br> Files name has to be 'IDUSER_DATE_TIME_1WORD'.</label>
+	<label style ="color:red;">Please do NOT rename your files before upload it !</label>
 	<br>
 	<button id="done">OK</button>
 </div>
