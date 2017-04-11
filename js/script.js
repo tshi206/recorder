@@ -22,7 +22,7 @@
 	var i= 0;
 	var chunks =[]; 
 	var currentBlob;
-	var initialURL ='https://130.216.118.226/index.php/s/lkYnpGiNx1FofK8'; //by default, type = word
+	var initialURL ='https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
 	var fileName;
 	var tokens =[];
 
@@ -132,27 +132,27 @@
 		switch(option) {
 		case 0:
 			timeInterval = 10000; //for word
-	 		initialURL = 'https://130.216.118.226/index.php/s/lkYnpGiNx1FofK8';
+	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
 			fileName = tokens[0];
 			break;
 		case 1:
 			timeInterval = 30000; //for list of word
-	 		initialURL = 'https://130.216.118.226/index.php/s/pgI8mGvOQ3ClSiM';
+	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20wordlist&fileid=82';
 			fileName = tokens[0];
 			break;
 		case 2:
 			timeInterval = 30000; //for short phrases
-	 		initialURL = 'https://130.216.118.226/index.php/s/62THd7XecVySSUb';
+	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=156';
 			fileName = tokens[2];
 			break;
 		case 3:
 			timeInterval = 60000; //for sentences
-	 		initialURL = 'https://130.216.118.226/index.php/s/62THd7XecVySSUb';
+	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
 			fileName = tokens[1];
 			break;
 		case 4:
 			timeInterval = 60000; //for other
-	 		initialURL = 'https://130.216.118.226/index.php/s/RQBr90wedMXcu5b';
+	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
 			fileName = tokens[0];
 			break;
 		}
