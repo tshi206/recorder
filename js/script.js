@@ -23,8 +23,10 @@
 	var chunks =[]; 
 	var currentBlob;
 	var initialURL ='https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
+	var path = '/DataBase VoNZ list_word/newfile.txt'; //by default, type = word
 	var fileName;
 	var tokens =[];
+	var secondStamp =0;
 
 	var Clock = {
 	totalSeconds: 0,
@@ -83,19 +85,14 @@
 			typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
 
 		        var timeStamp = new Date();
-		        var secondStamp = timeStamp.getDate() + "-"
+		        secondStamp = timeStamp.getDate() + "-"
 		                            + (timeStamp.getMonth() + 1) + "-"
 		                            + timeStamp.getFullYear() + "_"
 		                            + timeStamp.getHours() + "-"
 		                            + timeStamp.getMinutes() + "-"
 		                            + timeStamp.getSeconds();
-			
-			//create a blob for the text
-			var textToWrite = document.getElementById('name').value;
-			var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
 
-			//download text and audio
-			mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName,textFileAsBlob);
+			//download audio
 			mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName);
 		}
 		else{document.getElementById("myPopup").classList.toggle("show");}
@@ -115,6 +112,15 @@
 	    $('#done').click(function() {
 		hidewindows('fenetre_alert');
 		typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
+		
+		//create the text file with data of the recording
+		var url = OC.generateUrl('/apps/recorder/create');  
+		var data = {
+				path: path,
+				content: document.getElementById('name').value
+			   };
+		$.post(url, data).success();
+		    
 		window.open(initialURL);
 	    });
 
@@ -139,21 +145,25 @@
 			timeInterval = 30000; //for list of word
 	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20wordlist&fileid=82';
 			fileName = tokens[0];
+			path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 2:
 			timeInterval = 30000; //for short phrases
 	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=156';
 			fileName = tokens[2];
+			path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 3:
 			timeInterval = 60000; //for sentences
 	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
 			fileName = tokens[1];
+			path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 4:
 			timeInterval = 60000; //for other
 	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
 			fileName = tokens[0];
+			path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		}
 	    }
