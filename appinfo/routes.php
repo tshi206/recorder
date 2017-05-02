@@ -21,5 +21,6 @@ return [
     'routes' => [
 	   ['name' => 'settings#getUserValue', 'url' => '/settings', 'verb' => 'GET'],
            ['name' => 'settings#setRecorder', 'url' => '/settings', 'verb' => 'POST'],
+	   ['name' => 'settings#createTxt', 'url' => '/create', 'verb' => 'POST'],
     ]
 ];
