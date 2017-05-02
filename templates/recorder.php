@@ -2,7 +2,7 @@
         <br>
 
 	<label>Choose the type of recording : </label>
-		<select class="form-control" id="type" name="save1">
+		<select class="form-control" id="type" name="type">
 		      <option value="word" <?php if (($_['type']) == 'word') echo ' selected="selected"'; ?>>word</option>
 		      <option value="listword" <?php if (($_['type']) == 'listword') echo ' selected="selected"'; ?>>list of words (&lt;20 words)</option>
 		      <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>> short sentence (&gt;3 words)</option>
@@ -17,7 +17,7 @@
 	<br>
 	<br>
 
-	<textarea id="name" name="save2" placeholder="ex: Ko toku kupu i konei" value = ""></textarea>
+	<textarea id="name" name="name" placeholder="ex: Ko toku kupu i konei" value = ""></textarea>
 
 	<br>
 	<br>
@@ -27,7 +27,7 @@
 
 	<br>  <!--allow to align popup with their button -->
 	<span id= "myPopup" class = "popuptext">Please fill the textarea before download it !</span>
-        <button style="height:50px;width:150px" id="listen-recording" disabled>Download audio+txt and Listen</button>	
+        <button style="height:50px;width:150px" id="listen-recording" disabled>Download audio and Listen</button>	
 	<button style="height:50px;width:150px" id="save-recording" disabled>Contribute to VoNZ project</button>
 	<span id= "myPopup2" class = "popuptext">Please download the file on your computer first to put it on the server !</span>
 
@@ -57,7 +57,7 @@
 <a target="_blank">
 	<button><img src="<?php print_unescaped(OCP\Util::imagePath('recorder', 'add.svg')); ?>" style="height:30px"/></button>
 </a>
-in the next page to upload your files (WAV + TXT) in the database.</label>
+in the next page to upload your files (WAV) in the database.</label>
 	<br>
 	<label style ="color:red;">Please do NOT rename your files before upload it !</label>
 	<br>
