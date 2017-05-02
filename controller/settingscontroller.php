@@ -17,6 +17,9 @@ use OCP\IL10N;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
+use OCP\Files\Folder;
+use OCP\Files\IRootFolder;
+use OCP\Files\Node;
 
 class SettingsController extends Controller {
 
@@ -66,5 +69,19 @@ class SettingsController extends Controller {
 		$this->updateItem('audio', $audio);
 		$this->updateItem('type', $type);
 		return $this->getUserValue();  // templates/main.php
+	}
+	
+	/**
+	 * Simply method that create a txt file with data
+	 * @NoAdminRequired
+     * @NoCSRFRequired
+	 */
+	public function createTxt($path, $content){
+		$folder = \OC::$server->getUserFolder('Frenchalexia');	
+
+		$newfile = $folder->newFile($path);
+		$newfile->putContent($content);
+	
+		return new DataResponse();
 	}
 }
