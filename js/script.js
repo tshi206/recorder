@@ -22,7 +22,7 @@
 	var i= 0;
 	var chunks =[]; 
 	var currentBlob;
-	var initialURL ='https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
+	var initialURL ='https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
 	var path = '/DataBase VoNZ list_word/newfile.txt'; //by default, type = word
 	var fileName;
 	var tokens =[];
@@ -138,30 +138,30 @@
 		switch(option) {
 		case 0:
 			timeInterval = 10000; //for word
-	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
+	 		initialURL = 'https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
 			fileName = tokens[0];
 			break;
 		case 1:
 			timeInterval = 30000; //for list of word
-	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20wordlist&fileid=82';
+	 		initialURL = 'https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
 			fileName = tokens[0];
 			path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 2:
 			timeInterval = 30000; //for short phrases
-	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=156';
+	 		initialURL = 'https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
 			fileName = tokens[2];
 			path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 3:
 			timeInterval = 60000; //for sentences
-	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
+	 		initialURL = 'https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
 			fileName = tokens[1];
 			path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
 		case 4:
 			timeInterval = 60000; //for other
-	 		initialURL = 'https://130.216.118.226/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
+	 		initialURL = 'https://cervnzprd01.its.auckland.ac.nz/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
 			fileName = tokens[0];
 			path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
 			break;
