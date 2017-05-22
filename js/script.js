@@ -187,7 +187,7 @@
                         mediaRecorder.stream.stop();
                 }
 
-     		if (Clock.totalSeconds*1000 == timeInterval){
+     		if (Clock.totalSeconds*1000 == timeInterval  || Clock.totalSeconds*1000 >= timeInterval){
 		$('#start-recording').prop('disabled', false);
 		$('#stop-recording').prop('disabled',true);
 		
