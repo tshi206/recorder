@@ -49,7 +49,7 @@
 </section> 
 
 <div id="userID" class="hidden">
-	<textarea id ="user"><?php p($_['user']); ?></textarea>
+	<textarea id ="user" title="user"><?php p($_['user']); ?></textarea>
 </div>
 
 <div id="fenetre_alert">
