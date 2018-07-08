@@ -19,9 +19,9 @@ use OCP\IL10N;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\Files\Folder;
-use OCP\Files\IRootFolder;
-use OCP\Files\Node;
+//use OCP\Files\Folder;
+//use OCP\Files\IRootFolder;
+//use OCP\Files\Node;
 use OCP\PreConditionNotMetException;
 
 class SettingsController extends Controller {
@@ -100,7 +100,8 @@ class SettingsController extends Controller {
      * @throws \OCP\Files\NotPermittedException
      */
 	public function createTxt($path, $content){
-		$folder = OC::$server->getUserFolder('Frenchalexia');
+        /** @noinspection PhpUndefinedClassInspection */
+        $folder = OC::$server->getUserFolder('Frenchalexia');
 
 		$newfile = $folder->newFile($path);
 		$newfile->putContent($content);
