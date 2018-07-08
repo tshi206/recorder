@@ -21,7 +21,14 @@ use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use OCP\Files\Node;
 
-class SettingsController extends Controller {
+/**
+ * Class BackUpSettingsController
+ *
+ * Backup for original SettingsController
+ *
+ * @package OCA\Recorder\Controller
+ */
+class BackUpSettingsController extends Controller {
 
 	private $config;
 	private $userId;
