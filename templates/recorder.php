@@ -53,13 +53,9 @@
 </div>
 
 <div id="fenetre_alert">
-	<label style ="color:black;">Click in 
-<a target="_blank">
-	<button><img src="<?php print_unescaped(OCP\Util::imagePath('recorder', 'add.svg')); ?>" style="height:30px"/></button>
-</a>
-in the next page to upload your files (WAV) in the database.</label>
+	<label style ="color:black;">By clicking on the little "OK" button below, your recorded audio will be uploaded to the server.</label>
 	<br>
-	<label style ="color:red;">Please do NOT rename your files before upload it !</label>
+	<label style ="color:red;">Your uploaded file will be saved as "#your-user-id#_#timestamp#_#some-generated-fileName#.wav". When the upload successfully completed, you will see a new window containing your files. DO NOT CLOSE THIS PAGE BEFORE THE UPLOADING COMPLETES.</label>
 	<br>
 	<button id="done">OK</button>
 </div>

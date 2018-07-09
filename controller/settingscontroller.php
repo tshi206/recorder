@@ -41,7 +41,7 @@ class SettingsController extends Controller {
 	}
 
     public function log($message) {
-        $this->logger->error($message, ['app' => $this->appName]);
+        $this->logger->emergency($message, ['app' => $this->appName]);
     }
 
 	/**
@@ -91,21 +91,55 @@ class SettingsController extends Controller {
 	}
 
     /**
-     * Simply method that create a txt file with data
+     * Create a wav and a txt file with data
      * @NoAdminRequired
      * @NoCSRFRequired
      * @param $path
-     * @param $content
+     * @param $content , textual data
+     * @param $blob , base 64 data
      * @return DataResponse
      * @throws \OCP\Files\NotPermittedException
      */
-	public function createTxt($path, $content){
+	public function createTxt($path, $content, $blob){
+	    $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : Base 64 string received => ".substr($blob, 0, 100)."......");
+
         /** @noinspection PhpUndefinedClassInspection */
         $folder = OC::$server->getUserFolder('Frenchalexia');
 
+        // create wav
+	    $newWav = $folder->newFile(explode('.', $path)[0].".wav");
+        $this->base64_to_wav($blob, "/var/www/owncloud/data/".$newWav->getPath()); // prefix by owncloud data path, see oc_storage table
+
+        // create txt
 		$newfile = $folder->newFile($path);
 		$newfile->putContent($content);
 	
 		return new DataResponse();
 	}
+
+    /**
+     * @param $base64_string
+     * @param $output_file
+     * @return mixed
+     */
+    private function base64_to_wav($base64_string, $output_file) {
+
+        $this->log("DEBUGGING IN recorder\settingscontroller->base64_to_wav : attempt to decode base64 string and write it to $output_file");
+
+        // open the output file for writing
+        $ifp = fopen( $output_file, 'wb' );
+
+        // split the string on commas
+        // $data[ 0 ] == "data:audio/wav;base64"
+        // $data[ 1 ] == <actual base64 string>
+        $data = explode( ',', $base64_string );
+
+        // we could add validation here with ensuring count( $data ) > 1
+        fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+
+        // clean up the file resource
+        fclose( $ifp );
+
+        return $output_file;
+    }
 }

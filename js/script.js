@@ -108,7 +108,6 @@
 
         $('#save-recording').on('click', function() {
 
-
             if(document.getElementById("listen-recording").disabled === true){
 
                 document.getElementById("myPopup2").classList.remove("show");
@@ -117,19 +116,49 @@
             else{document.getElementById("myPopup2").classList.toggle("show");}
         });
 
+
         $('#done').on('click', function() {
+
             hidewindows('fenetre_alert');
             typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
 
-            //create the text file with data of the recording
-            let url = OC.generateUrl('/apps/recorder/create');
-            let data = {
-                path: path,
-                content: document.getElementById('name').value
-            };
-            $.post(url, data).success();
+            const reader = new FileReader();
+            const reader2 = new FileReader();
 
-            window.open(initialURL);
+            console.log(currentBlob.valueOf());
+            console.log(currentBlob.toString());
+
+            // Start reading the blob as base64 string.
+            reader.readAsDataURL(currentBlob);
+
+            // Start reading the blob as text.
+            reader2.readAsText(currentBlob);
+
+            // This fires after the blob has been read/loaded.
+            reader.onloadend = function() {
+                let base64data = reader.result;
+                console.log(base64data);
+
+                //upload the base64 string and create  the text file with data of the recording
+                let url = OC.generateUrl('/apps/recorder/create');
+                let data = {
+                    path: path,
+                    content: document.getElementById('name').value,
+                    blob: base64data
+                };
+                $.post(url, data).done(() => {
+                    window.open(initialURL);
+                });
+            };
+
+            // This fires after the blob has been read/loaded.
+            reader2.onloadend = () => {
+                // noinspection JSUnresolvedVariable
+                const text = reader2.result;
+                // This is just for debug purposes
+                console.log(text);
+            };
+
         });
 
 
