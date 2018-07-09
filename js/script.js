@@ -22,7 +22,8 @@
         // let i = 0;
         // let chunks = [];
         let currentBlob;
-        let initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
+        // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
+        let initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
         let fileName;
         let tokens = [];
@@ -64,6 +65,7 @@
 
             typeChoice(document.getElementById('type').options.selectedIndex); //to define the timeInterval
             Clock.start();
+            console.log("start recording");
             captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
         });
 
@@ -142,33 +144,34 @@
         //Assign different values in function of recording type
         function typeChoice(option){
             switch(option) {
+                // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
                 case 0:
                     timeInterval = 10000; //for word
-                    initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
+                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     break;
                 case 1:
                     timeInterval = 30000; //for list of word
-                    initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
+                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     break;
                 case 2:
                     timeInterval = 30000; //for short phrases
-                    initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
+                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
                     fileName = tokens[2];
                     path ='/DataBase VoNZ short_sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     break;
                 case 3:
                     timeInterval = 60000; //for sentences
-                    initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
+                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
                     fileName = tokens[1];
                     path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     break;
                 case 4:
                     timeInterval = 60000; //for other
-                    initialURL = 'http://192.168.1.102/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
+                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
                     fileName = tokens[0];
                     path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     break;
