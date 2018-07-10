@@ -33,7 +33,12 @@ class FilesystemHooks
     public function register() {
 
         $insertRowsInDBCallback = function (Node $node) {
-            // TODO : your code that executes after $node is created
+            // This application ends up not using any hooks, however, I decide to leave this class as a placeholder for
+            // any hook-related implementation from future developers. If you want to create customized hooking callback,
+            // put your codes here. The hooks have been registered in app.php and are currently listening on file system
+            // events. If you want to listen on other events, please refer to the official documentation and replace
+            // corresponding parts in this file and in app.php.
+            /*
             $this->log("DEBUGGING IN Recorder\FilesystemHooks : Detected INode Creation {
             file id => ".$node->getId()."
             file internal path => ".$node->getInternalPath()."
@@ -46,10 +51,16 @@ class FilesystemHooks
             file owner uid => ".$node->getOwner()->getUID()."
             file modified time in unix timestamp => ".$node->getMTime()."
             }");
+            */
         };
 
         $deleteRowsInDBCallback = function(Node $node) {
-            // TODO : your code that executes after $node is deleted
+            // This application ends up not using any hooks, however, I decide to leave this class as a placeholder for
+            // any hook-related implementation from future developers. If you want to create customized hooking callback,
+            // put your codes here. The hooks have been registered in app.php and are currently listening on file system
+            // events. If you want to listen on other events, please refer to the official documentation and replace
+            // corresponding parts in this file and in app.php.
+            /*
             $this->log("DEBUGGING IN Recorder\FilesystemHooks : Detected INode Deletion {
             file id => ".$node->getId()."
             file internal path => ".$node->getInternalPath()."
@@ -62,6 +73,7 @@ class FilesystemHooks
             file owner uid => ".$node->getOwner()->getUID()."
             file modified time in unix timestamp => ".$node->getMTime()."
             }");
+            */
         };
 
         // callback after creating files
