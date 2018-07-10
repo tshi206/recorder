@@ -147,6 +147,7 @@
                     blob: base64data
                 };
                 $.post(url, data).done(() => {
+                    alert("File uploaded. If you do not see a new window opened, you can go to 'Files' at the top left corner");
                     window.open(initialURL);
                 });
             };
