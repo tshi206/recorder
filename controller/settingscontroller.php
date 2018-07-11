@@ -11,7 +11,11 @@
 
 namespace OCA\Recorder\Controller;
 
+use DateTime;
 use OC;
+use OCA\Recorder\Db\Recording;
+use OCA\Recorder\Db\RecordingMapper;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\ILogger;
 use OCP\IRequest;
 use OCP\IConfig;
@@ -26,14 +30,17 @@ use OCP\PreConditionNotMetException;
 
 class SettingsController extends Controller {
 
+    private $mapper;
+
     private $logger;
 
 	private $config;
 	private $userId;
 	private $l10n;
 
-	public function __construct(ILogger $logger, $AppName, IRequest $request,IConfig $config, IL10N $l10n, $UserId){
+	public function __construct(RecordingMapper $mapper, ILogger $logger, $AppName, IRequest $request,IConfig $config, IL10N $l10n, $UserId){
 		parent::__construct($AppName, $request);
+		$this->mapper = $mapper;
 		$this->logger = $logger;
 		$this->userId = $UserId;
 		$this->config = $config;
@@ -54,7 +61,12 @@ class SettingsController extends Controller {
 			'audio' => $this->getItem('audio'),
 			'type' => $this->getItem('type'),
 			'user' => $this->userId];
-		return new TemplateResponse('recorder', 'main', $params);
+		$csp = new ContentSecurityPolicy();
+		$csp->addAllowedConnectDomain("api.ipify.org")->addAllowedConnectDomain("ip-api.com");
+		$response = new TemplateResponse('recorder', 'main', $params);
+		$response->setContentSecurityPolicy($csp);
+        return $response;
+		//return new TemplateResponse('recorder', 'main', $params);
 	}
 
 	protected function getItem($key){
@@ -97,11 +109,20 @@ class SettingsController extends Controller {
      * @param $path
      * @param $content , textual data
      * @param $blob , base 64 data
+     * @param $geoInfo , array of geo data
+     * @param $type , string representing recording type
      * @return DataResponse
      * @throws \OCP\Files\NotPermittedException
      */
-	public function createTxt($path, $content, $blob){
+	public function createTxt($path, $content, $blob, $geoInfo, $type){
 	    $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : Base 64 string received => ".substr($blob, 0, 100)."......");
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : GEO INFO received => START reading array");
+        foreach ($geoInfo as $key => $value) {
+            $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : GEO INFO Array :: $key => $value");
+        }
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : GEO INFO received => END of array");
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : RECORDING TYPE received => $type");
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : TRYING TO GET TABLE NAME => ".$this->mapper->getTableName());
 
         /** @noinspection PhpUndefinedClassInspection */
         $folder = OC::$server->getUserFolder('Frenchalexia');
@@ -113,8 +134,28 @@ class SettingsController extends Controller {
         // create txt
 		$newfile = $folder->newFile($path);
 		$newfile->putContent($content);
-	
-		return new DataResponse();
+
+		$recording = new Recording();
+		$recording->filename = $newWav->getName();
+		$recording->owner = $newWav->getOwner()->getUID();
+		$recording->uploader = $this->userId;
+		$recording->internalPath = $newWav->getInternalPath();
+		$recording->path = $newWav->getPath();
+		$recording->recordingType = $type;
+		$recording->uploadTime = $this->getNowInSec();
+		$recording->city = $geoInfo['city'];
+		$recording->region = $geoInfo['region'];
+		$recording->regionName = $geoInfo['regionName'];
+		$recording->country = $geoInfo['country'];
+		$recording->countryCode = $geoInfo['countryCode'];
+		$recording->timezone = $geoInfo['timezone'];
+		$recording->zip = $geoInfo['zip'];
+		$recording->latitude = $geoInfo['lat'];
+		$recording->longitude = $geoInfo['lon'];
+		$recording->content = $content;
+        $recording->isAddedToMap = false;
+
+		return new DataResponse($this->mapper->create($recording));
 	}
 
     /**
@@ -141,5 +182,19 @@ class SettingsController extends Controller {
         fclose( $ifp );
 
         return $output_file;
+    }
+
+    /**
+     * PHP support date time up to microseconds and mysql support DATETIME(3) which preserve up to milliseconds precision.
+     * However, owncloud DOES NOT support neither of those, it only supports the traditional DATETIME in its schema definition xml file and DATETIME only holds the precision up to seconds.
+     * @return bool|string
+     */
+    private function getNowInSec(){
+        $t = microtime(true);
+        $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+        $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+        $d_str = $d->format("Y-m-d H:i:s.u");
+        $d_milli = substr($d_str, 0, strlen($d_str) - 7);
+        return $d_milli;
     }
 }

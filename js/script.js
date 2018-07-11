@@ -22,6 +22,7 @@
         // let i = 0;
         // let chunks = [];
         let currentBlob;
+        let type = "word";
         // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
         let initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
@@ -136,20 +137,37 @@
 
             // This fires after the blob has been read/loaded.
             reader.onloadend = function() {
-                let base64data = reader.result;
-                console.log(base64data);
 
-                //upload the base64 string and create  the text file with data of the recording
-                let url = OC.generateUrl('/apps/recorder/create');
-                let data = {
-                    path: path,
-                    content: document.getElementById('name').value,
-                    blob: base64data
-                };
-                $.post(url, data).done(() => {
-                    alert("File uploaded. If you do not see a new window opened, you can go to 'Files' at the top left corner");
-                    window.open(initialURL);
+                // get the remote ip address of the client
+                $.get("https://api.ipify.org?format=json", (ipData) => {
+
+                    console.log("Remote IP of this machine is : " + ipData.ip);
+
+                    $.get("http://ip-api.com/json/" + ipData.ip, (geoInfoData) => {
+
+                        console.log("Geo Info : " + geoInfoData);
+
+                        let base64data = reader.result;
+                        console.log(base64data);
+
+                        //upload the base64 string and create  the text file with data of the recording
+                        let url = OC.generateUrl('/apps/recorder/create');
+                        let data = {
+                            path: path,
+                            content: document.getElementById('name').value,
+                            blob: base64data,
+                            geoInfo: geoInfoData,
+                            type: type
+                        };
+                        $.post(url, data).done(() => {
+                            alert("File uploaded. If you do not see a new window opened, you can go to 'Files' at the top left corner");
+                            window.open(initialURL);
+                        });
+
+                    });
+
                 });
+
             };
 
             // This fires after the blob has been read/loaded.
@@ -180,30 +198,35 @@
                     initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
+                    type = "word";
                     break;
                 case 1:
                     timeInterval = 30000; //for list of word
                     initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
+                    type = "word list";
                     break;
                 case 2:
                     timeInterval = 30000; //for short phrases
                     initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
                     fileName = tokens[2];
                     path ='/DataBase VoNZ short_sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
+                    type = "short sentence";
                     break;
                 case 3:
                     timeInterval = 60000; //for sentences
                     initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
                     fileName = tokens[1];
                     path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
+                    type = "sentence";
                     break;
                 case 4:
                     timeInterval = 60000; //for other
                     initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
                     fileName = tokens[0];
                     path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
+                    type = "unclassified";
                     break;
             }
         }
