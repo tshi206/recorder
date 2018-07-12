@@ -8,3 +8,7 @@
 .idea/**
 **/.idea/**
 
+#ignore big csv
+**/nz-street-address.csv
+nz-street-address.csv
+
