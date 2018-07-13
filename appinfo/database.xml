@@ -118,6 +118,36 @@
                 <type>boolean</type>
                 <notnull>true</notnull>
             </field>
+            <field>
+                <name>city_name</name>
+                <type>text</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>city_lon</name>
+                <type>float</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>city_lat</name>
+                <type>float</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>suburb_name</name>
+                <type>text</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>suburb_lon</name>
+                <type>float</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>suburb_lat</name>
+                <type>float</type>
+                <notnull>true</notnull>
+            </field>
         </declaration>
     </table>
 </database>

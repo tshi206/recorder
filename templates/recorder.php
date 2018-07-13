@@ -24,6 +24,17 @@
 
 	<button id="start-recording">Start</button>
         <button id="stop-recording" disabled>Stop</button>
+    <br>
+
+    <label>Please choose your city : </label>
+    <select class="form-control" id="city" name="type">
+<!--        <option value="word" --><?php //if (($_['type']) == 'word') echo ' selected="selected"'; ?><!--><!--word</option>-->
+    </select>
+
+    <label>Please choose your suburb : </label>
+    <select class="form-control" id="suburb" name="type">
+<!--        <option value="word" --><?php //if (($_['type']) == 'word') echo ' selected="selected"'; ?><!--><!--word</option>-->
+    </select>
 
 	<br>  <!--allow to align popup with their button -->
 	<span id= "myPopup" class = "popuptext">Please fill the textarea before download it !</span>

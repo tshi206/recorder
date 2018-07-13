@@ -32,6 +32,12 @@ class Recording extends Entity implements \JsonSerializable
     public $longitude;
     public $content;
     public $isAddedToMap;
+    public $cityName;
+    public $cityLon;
+    public $cityLat;
+    public $suburbName;
+    public $suburbLon;
+    public $suburbLat;
 
     public function __construct() {
         // add types in constructor
@@ -78,6 +84,18 @@ class Recording extends Entity implements \JsonSerializable
                 return "content";
             case "is_added_to_map":
                 return 'isAddedToMap';
+            case "city_name":
+                return 'cityName';
+            case "city_lon":
+                return 'cityLon';
+            case "city_lat":
+                return 'cityLat';
+            case "suburb_name":
+                return 'suburbName';
+            case "suburb_lon":
+                return 'suburbLon';
+            case "suburb_lat":
+                return 'suburbLat';
             default:
                 return parent::columnToProperty($column);
         }
@@ -119,6 +137,18 @@ class Recording extends Entity implements \JsonSerializable
                 return "content";
             case "isAddedToMap":
                 return 'is_added_to_map';
+            case "cityName":
+                return 'city_name';
+            case "cityLon":
+                return 'city_lon';
+            case "cityLat":
+                return 'city_lat';
+            case "suburbName":
+                return 'suburb_name';
+            case "suburbLon":
+                return 'suburb_lon';
+            case "suburbLat":
+                return 'suburb_lat';
             default:
                 return parent::propertyToColumn($property);
         }

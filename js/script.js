@@ -12,6 +12,71 @@
 
     $(document).ready(function () {
 
+        // init global city and suburb state
+        let cityName = "";
+        let suburbName = "";
+
+        // ADD LISTENER ON CITIES DROP-DOWN
+        $('#city').on("change", () => {
+            console.log("city selection event fired");
+            let optionSelected = $("option:selected", this);
+            let valueSelected = $('#city').find(":selected").text();
+            cityName = valueSelected;
+            console.log("selected value is : " + valueSelected);
+            console.log("selected option is : " + optionSelected.text());
+            $.ajax(OC.generateUrl("/apps/recorder/getsuburbs") + "/" + valueSelected, {
+                method: 'GET',
+                contentType: 'application/json'
+            }).done(suburbs => {
+                console.log("suburbs received");
+                //console.log(suburbs);
+                let suburbSelector = $('#suburb');
+                // noinspection JSValidateTypes
+                if (suburbSelector.children('option').toArray().length !== 0) {
+                    suburbSelector.empty(); // remove all descendants, e.g., options
+                }
+                suburbs.forEach( suburb => {
+                    let option = document.createElement("OPTION");
+                    option.value = suburb;
+                    option.text = suburb;
+                    suburbSelector.append(option);
+                    if (suburb === "Auckland Central" || suburb === suburbs[0]) {
+                        option.selected = true;
+                        suburbName = suburb;
+                        suburbSelector.change();
+                        console.log("suburb selected : " + suburb);
+                    }
+                });
+            });
+        });
+
+        // TODO : ADD LISTENER ON SUBURBS DROP-DOWN
+        $('#suburb').on("change", () => {
+            let optionSelected = $("option:selected", this);
+            let valueSelected = $('#suburb').find(":selected").text();
+            suburbName = valueSelected;
+            console.log("suburb value selected : " + valueSelected);
+            console.log("suburb option selected : " + optionSelected.text());
+        });
+
+        // SEND REQUEST TO LOAD UP CITIES DROP-DOWN
+        $.get(OC.generateUrl("/apps/recorder/getcities"), (cities) => {
+            //console.log(cities);
+            let citySelector = $('#city');
+            cities.forEach( city => {
+                let option = document.createElement("OPTION");
+                option.value = city;
+                option.text = city;
+                citySelector.append(option);
+                if (city === "Auckland") {
+                    option.selected = true;
+                    cityName = city;
+                    citySelector.change();
+                    console.log("city selected : " + city);
+                }
+            });
+        });
+
         let mediaConstraints = {
             audio: true
         };
@@ -24,7 +89,7 @@
         let currentBlob;
         let type = "word";
         // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
-        let initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
+        let initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
         let fileName;
         let tokens = [];
@@ -157,7 +222,11 @@
                             content: document.getElementById('name').value,
                             blob: base64data,
                             geoInfo: geoInfoData,
-                            type: type
+                            type: type,
+                            // GET SELECTED CITY NAME
+                            city: cityName,
+                            // GET SELECTED SUBURB NAME
+                            suburb: suburbName
                         };
                         $.post(url, data).done(() => {
                             alert("File uploaded. If you do not see a new window opened, you can go to 'Files' at the top left corner");
@@ -195,35 +264,35 @@
                 // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
                 case 0:
                     timeInterval = 10000; //for word
-                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
+                    initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word";
                     break;
                 case 1:
                     timeInterval = 30000; //for list of word
-                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
+                    initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
                     fileName = tokens[0];
                     path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word list";
                     break;
                 case 2:
                     timeInterval = 30000; //for short phrases
-                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
+                    initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
                     fileName = tokens[2];
                     path ='/DataBase VoNZ short_sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "short sentence";
                     break;
                 case 3:
                     timeInterval = 60000; //for sentences
-                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
+                    initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
                     fileName = tokens[1];
                     path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "sentence";
                     break;
                 case 4:
                     timeInterval = 60000; //for other
-                    initialURL = 'http://192.168.1.102/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
+                    initialURL = 'http://192.168.1.104/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
                     fileName = tokens[0];
                     path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "unclassified";

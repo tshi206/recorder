@@ -57,15 +57,29 @@ class RecordingMapper extends Mapper
         $longitude = $entity->longitude;
         $content = $entity->content;
         $isAddedToMap = $entity->isAddedToMap;
+        $userSelectedCity = $entity->cityName;
+        $userSelectedSuburb = $entity->suburbName;
+
+        // get city_lon, city_lat, suburb_lon, and suburb_lat
+        $sql_get_city_lon_lat = 'SELECT city_lon, city_lat FROM oc_city_coords where city_name = ?';
+        $result = $this->execute($sql_get_city_lon_lat, [$userSelectedCity]);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $city_lon = $row['city_lon'];
+        $city_lat = $row['city_lat'];
+        $sql_get_suburb_lon_lat = 'SELECT suburb_lon, suburb_lat FROM oc_suburb_city_coords where suburb_name = ?';
+        $result = $this->execute($sql_get_suburb_lon_lat, [$userSelectedSuburb]);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $suburb_lon = $row['suburb_lon'];
+        $suburb_lat = $row['suburb_lat'];
 
         $this->log("DEBUGGING IN RecordingMapper->create : PRE SAVED LAT => $latitude}");
         $this->log("DEBUGGING IN RecordingMapper->create : PRE SAVED LON => $longitude}");
 
-        $sql = 'INSERT INTO `*PREFIX*recorder_recordings` (filename, owner, uploader, internal_path, path, recording_type, upload_time, city, region, region_name, country, country_code, timezone, zip, latitude, longitude, content, is_added_to_map) VALUES (
-			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        $sql = 'INSERT INTO `*PREFIX*recorder_recordings` (filename, owner, uploader, internal_path, path, recording_type, upload_time, city, region, region_name, country, country_code, timezone, zip, latitude, longitude, content, is_added_to_map, city_name, city_lon, city_lat, suburb_name, suburb_lon, suburb_lat) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 		)';
 
-        $this->execute($sql, [$filename, $owner, $uploader, $internal_path, $path, $recording_type, $upload_time, $city, $region, $region_name, $country, $country_code, $timezone, $zip, $latitude, $longitude, $content, $isAddedToMap]);
+        $this->execute($sql, [$filename, $owner, $uploader, $internal_path, $path, $recording_type, $upload_time, $city, $region, $region_name, $country, $country_code, $timezone, $zip, $latitude, $longitude, $content, $isAddedToMap, $userSelectedCity, $city_lon, $city_lat, $userSelectedSuburb, $suburb_lon, $suburb_lat]);
 
         $sql1 = 'SELECT * From `*PREFIX*recorder_recordings` where upload_time = ? AND uploader = ?';
 
@@ -98,6 +112,12 @@ class RecordingMapper extends Mapper
         $savedRecording->longitude = $row['longitude'];
         $savedRecording->content = $row['content'];
         $savedRecording->isAddedToMap = $row['is_added_to_map'];
+        $savedRecording->cityName = $row['city_name'];
+        $savedRecording->cityLon = $row['city_lon'];
+        $savedRecording->cityLat = $row['city_lat'];
+        $savedRecording->suburbName = $row['suburb_name'];
+        $savedRecording->suburbLon = $row['suburb_lon'];
+        $savedRecording->suburbLat = $row['suburb_lat'];
 
         $this->log("DEBUGGING IN NoteMapper->create : SAVED Recording {
 			id => $savedRecording->id;

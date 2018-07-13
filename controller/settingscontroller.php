@@ -15,6 +15,8 @@ use DateTime;
 use OC;
 use OCA\Recorder\Db\Recording;
 use OCA\Recorder\Db\RecordingMapper;
+use OCA\Recorder\Db\CityMapper; // OCA\recorder\lib\Db\CityMapper is not valid, don't put lib in!!!!!!!!! use Recorder (capitalized first letter) NOT recorder!!!!!!!!!!!!!!!!!!!!
+use OCA\Recorder\Db\SuburbMapper;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\ILogger;
 use OCP\IRequest;
@@ -30,6 +32,8 @@ use OCP\PreConditionNotMetException;
 
 class SettingsController extends Controller {
 
+    private $suburbMapper;
+    private $cityMapper;
     private $mapper;
 
     private $logger;
@@ -38,8 +42,10 @@ class SettingsController extends Controller {
 	private $userId;
 	private $l10n;
 
-	public function __construct(RecordingMapper $mapper, ILogger $logger, $AppName, IRequest $request,IConfig $config, IL10N $l10n, $UserId){
+	public function __construct(SuburbMapper $suburbMapper, CityMapper $cityMapper, RecordingMapper $mapper, ILogger $logger, $AppName, IRequest $request,IConfig $config, IL10N $l10n, $UserId){
 		parent::__construct($AppName, $request);
+		$this->suburbMapper = $suburbMapper;
+		$this->cityMapper = $cityMapper;
 		$this->mapper = $mapper;
 		$this->logger = $logger;
 		$this->userId = $UserId;
@@ -111,10 +117,12 @@ class SettingsController extends Controller {
      * @param $blob , base 64 data
      * @param $geoInfo , array of geo data
      * @param $type , string representing recording type
+     * @param $city
+     * @param $suburb
      * @return DataResponse
      * @throws \OCP\Files\NotPermittedException
      */
-	public function createTxt($path, $content, $blob, $geoInfo, $type){
+	public function createTxt($path, $content, $blob, $geoInfo, $type, $city, $suburb){
 	    $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : Base 64 string received => ".substr($blob, 0, 100)."......");
         $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : GEO INFO received => START reading array");
         foreach ($geoInfo as $key => $value) {
@@ -123,6 +131,8 @@ class SettingsController extends Controller {
         $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : GEO INFO received => END of array");
         $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : RECORDING TYPE received => $type");
         $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : TRYING TO GET TABLE NAME => ".$this->mapper->getTableName());
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : SELECTED CITY NAME => ".$city);
+        $this->log("DEBUGGING IN recorder\settingscontroller->createTxt : SELECTED SUBURB NAME => ".$suburb);
 
         /** @noinspection PhpUndefinedClassInspection */
         $folder = OC::$server->getUserFolder('Frenchalexia');
@@ -154,6 +164,9 @@ class SettingsController extends Controller {
 		$recording->longitude = $geoInfo['lon'];
 		$recording->content = $content;
         $recording->isAddedToMap = false;
+        // cityName, suburbName
+        $recording->cityName = $city;
+        $recording->suburbName = $suburb;
 
 		return new DataResponse($this->mapper->create($recording));
 	}
@@ -196,5 +209,21 @@ class SettingsController extends Controller {
         $d_str = $d->format("Y-m-d H:i:s.u");
         $d_milli = substr($d_str, 0, strlen($d_str) - 7);
         return $d_milli;
+    }
+
+    /**
+     * get all cities
+     */
+    public function getCityList(){
+        return new DataResponse($this->cityMapper->findAllCities());
+    }
+
+    /**
+     * get suburbs by city
+     * @param $city
+     * @return DataResponse
+     */
+    public function getSuburbList($city){
+        return new DataResponse($this->suburbMapper->findSuburbsByCity($city));
     }
 }

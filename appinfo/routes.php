@@ -22,5 +22,7 @@ return [
 	   ['name' => 'settings#getUserValue', 'url' => '/settings', 'verb' => 'GET'],
            ['name' => 'settings#setRecorder', 'url' => '/settings', 'verb' => 'POST'],
 	   ['name' => 'settings#createTxt', 'url' => '/create', 'verb' => 'POST'],
+        ['name' => 'settings#getCityList', 'url' => '/getcities', 'verb' => 'GET'],
+        ['name' => 'settings#getSuburbList', 'url' => '/getsuburbs/{city}', 'verb' => 'GET'],
     ]
 ];
