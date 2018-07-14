@@ -50,7 +50,7 @@
             });
         });
 
-        // TODO : ADD LISTENER ON SUBURBS DROP-DOWN
+        // ADD LISTENER ON SUBURBS DROP-DOWN
         $('#suburb').on("change", () => {
             let optionSelected = $("option:selected", this);
             let valueSelected = $('#suburb').find(":selected").text();
