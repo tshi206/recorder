@@ -4,8 +4,8 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author Shawn <syu702@aucklanduni.ac.nz>, A.Daugieras <adau828@aucklanduni.ac.nz>
- * @copyright Shawn,Daugieras 2017
+ * @author Shawn <syu702@aucklanduni.ac.nz>, A.Daugieras <adau828@aucklanduni.ac.nz>, Mason <tshi206@aucklanduni.ac.nz>
+ * @copyright Shawn,Daugieras,Mason 2018
  */
 
 (function ($, OC) {
