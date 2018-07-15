@@ -56,7 +56,8 @@ class RecordingMapper extends Mapper
         $latitude = $entity->latitude;
         $longitude = $entity->longitude;
         $content = $entity->content;
-        $isAddedToMap = $entity->isAddedToMap;
+        $isStandalone = $entity->isStandalone;
+        $isRepresentative = $entity->isRepresentative;
         $userSelectedCity = $entity->cityName;
         $userSelectedSuburb = $entity->suburbName;
 
@@ -75,11 +76,11 @@ class RecordingMapper extends Mapper
         $this->log("DEBUGGING IN RecordingMapper->create : PRE SAVED LAT => $latitude}");
         $this->log("DEBUGGING IN RecordingMapper->create : PRE SAVED LON => $longitude}");
 
-        $sql = 'INSERT INTO `*PREFIX*recorder_recordings` (filename, owner, uploader, internal_path, path, recording_type, upload_time, city, region, region_name, country, country_code, timezone, zip, latitude, longitude, content, is_added_to_map, city_name, city_lon, city_lat, suburb_name, suburb_lon, suburb_lat) VALUES (
-			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        $sql = 'INSERT INTO `*PREFIX*recorder_recordings` (filename, owner, uploader, internal_path, path, recording_type, upload_time, city, region, region_name, country, country_code, timezone, zip, latitude, longitude, content, is_standalone, is_representative, city_name, city_lon, city_lat, suburb_name, suburb_lon, suburb_lat) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 		)';
 
-        $this->execute($sql, [$filename, $owner, $uploader, $internal_path, $path, $recording_type, $upload_time, $city, $region, $region_name, $country, $country_code, $timezone, $zip, $latitude, $longitude, $content, $isAddedToMap, $userSelectedCity, $city_lon, $city_lat, $userSelectedSuburb, $suburb_lon, $suburb_lat]);
+        $this->execute($sql, [$filename, $owner, $uploader, $internal_path, $path, $recording_type, $upload_time, $city, $region, $region_name, $country, $country_code, $timezone, $zip, $latitude, $longitude, $content, $isStandalone, $isRepresentative, $userSelectedCity, $city_lon, $city_lat, $userSelectedSuburb, $suburb_lon, $suburb_lat]);
 
         $sql1 = 'SELECT * From `*PREFIX*recorder_recordings` where upload_time = ? AND uploader = ?';
 
@@ -111,7 +112,8 @@ class RecordingMapper extends Mapper
         $savedRecording->latitude = $row['latitude'];
         $savedRecording->longitude = $row['longitude'];
         $savedRecording->content = $row['content'];
-        $savedRecording->isAddedToMap = $row['is_added_to_map'];
+        $savedRecording->isStandalone = $row['is_standalone'];
+        $savedRecording->isRepresentative = $row['is_representative'];
         $savedRecording->cityName = $row['city_name'];
         $savedRecording->cityLon = $row['city_lon'];
         $savedRecording->cityLat = $row['city_lat'];
@@ -125,7 +127,8 @@ class RecordingMapper extends Mapper
 			content => $savedRecording->content;
 			latitude => $savedRecording->latitude;
 			longitude => $savedRecording->longitude;
-			isAddedToMap => $savedRecording->isAddedToMap;
+			isStandalone => $savedRecording->isStandalone;
+			isRepresentative => $savedRecording->isRepresentative;
 		}");
 
         return $savedRecording;

@@ -114,7 +114,12 @@
                 <notnull>true</notnull>
             </field>
             <field>
-                <name>is_added_to_map</name>
+                <name>is_standalone</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>is_representative</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
             </field>

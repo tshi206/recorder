@@ -5,8 +5,8 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author A.Daugieras <adau828@aucklanduni.ac.nz>
- * @copyright Daugieras 2017
+ * @author A.Daugieras <adau828@aucklanduni.ac.nz>, Mason Shi <tshi206@aucklanduni.ac.nz>
+ * @copyright Daugieras,Mason 2018
  */
 
 namespace OCA\Recorder\Controller;
@@ -163,7 +163,8 @@ class SettingsController extends Controller {
 		$recording->latitude = $geoInfo['lat'];
 		$recording->longitude = $geoInfo['lon'];
 		$recording->content = $content;
-        $recording->isAddedToMap = false;
+        $recording->isStandalone = false;
+        $recording->isRepresentative = false;
         // cityName, suburbName
         $recording->cityName = $city;
         $recording->suburbName = $suburb;

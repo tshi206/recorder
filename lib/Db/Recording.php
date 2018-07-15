@@ -31,7 +31,8 @@ class Recording extends Entity implements \JsonSerializable
     public $latitude;
     public $longitude;
     public $content;
-    public $isAddedToMap;
+    public $isStandalone; // bool, to toggle standalone maker in map
+    public $isRepresentative; // bool, to toggle representative maker in map
     public $cityName;
     public $cityLon;
     public $cityLat;
@@ -82,8 +83,10 @@ class Recording extends Entity implements \JsonSerializable
                 return "longitude";
             case "content":
                 return "content";
-            case "is_added_to_map":
-                return 'isAddedToMap';
+            case "is_standalone":
+                return 'isStandalone';
+            case "is_representative":
+                return 'isRepresentative';
             case "city_name":
                 return 'cityName';
             case "city_lon":
@@ -135,8 +138,10 @@ class Recording extends Entity implements \JsonSerializable
                 return "longitude";
             case "content":
                 return "content";
-            case "isAddedToMap":
-                return 'is_added_to_map';
+            case "isStandalone":
+                return 'is_standalone';
+            case "isRepresentative":
+                return 'is_representative';
             case "cityName":
                 return 'city_name';
             case "cityLon":
