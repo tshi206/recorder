@@ -86,10 +86,9 @@
     margin: auto;
     text-align: center;
     width: 50%; /*juste à titre d'exemple*/
-    height: 50px;
+    height: 80%;
     background-color: lightgrey;
     font-weight: bold;
-    font-color; white;
     visibility: hidden; /*partie importante: cacher la div et son contenu*/
     z-index: 9999; /*partie importante: à l'affichage, la div sera au-dessus de tout le reste*/
     position: fixed; /*à titre d'exemple également*/
