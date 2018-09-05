@@ -64,9 +64,9 @@
 </div>
 
 <div id="fenetre_alert">
-	<label style ="color:black;">By clicking on the little "OK" button below, your recorded audio will be uploaded to the server.</label>
+	<label style ="color:black;">Click "OK" button to start your upload. Your uploaded file will be saved as "#your-user-id#_#timestamp#_#some-generated-fileName#.wav".</label>
 	<br>
-	<label style ="color:red;">Your uploaded file will be saved as "#your-user-id#_#timestamp#_#some-generated-fileName#.wav". When the upload successfully completed, you will see a new window containing your files. DO NOT CLOSE THIS PAGE BEFORE THE UPLOADING COMPLETES.</label>
+	<label style ="color:red;"> When the upload successfully completed, you will see a new window containing your files. DO NOT CLOSE THIS PAGE BEFORE THE UPLOADING COMPLETES.</label>
 	<br>
 	<button id="done">OK</button>
 </div>
