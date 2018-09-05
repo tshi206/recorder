@@ -86,7 +86,7 @@
     margin: auto;
     text-align: center;
     width: 50%; /*juste à titre d'exemple*/
-    height: 30%;
+    height: 25%;
     background-color: lightgrey;
     font-weight: bold;
     visibility: hidden; /*partie importante: cacher la div et son contenu*/
