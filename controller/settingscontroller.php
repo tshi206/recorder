@@ -139,7 +139,7 @@ class SettingsController extends Controller {
 
         // create wav
 	    $newWav = $folder->newFile(explode('.', $path)[0].".wav");
-        $this->base64_to_wav($blob, "/var/www/owncloud/data/".$newWav->getPath()); // prefix by owncloud data path, see oc_storage table
+        $this->base64_to_wav($blob, "/var/www/p4/owncloud/data/".$newWav->getPath()); // prefix by owncloud data path, see oc_storage table
 
         // create txt
 		$newfile = $folder->newFile($path);
