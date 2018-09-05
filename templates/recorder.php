@@ -64,9 +64,9 @@
 </div>
 
 <div id="fenetre_alert">
-	<label style ="color:black;">Click "OK" button to start your upload. Your uploaded file will be saved as "#your-user-id#_#timestamp#_#some-generated-fileName#.wav".</label>
+	<label style ="color:black; height: 40%; width: 80%;">Click "OK" button to start your upload. Your uploaded file will be saved as "#your-user-id#_#timestamp#_#some-generated-fileName#.wav".</label>
 	<br>
-	<label style ="color:red;"> When the upload successfully completed, you will see a new window containing your files. DO NOT CLOSE THIS PAGE BEFORE THE UPLOADING COMPLETES.</label>
+	<label style ="color:red; height: 40%; width: 80%;"> When the upload successfully completed, you will see a new window containing your files. DO NOT CLOSE THIS PAGE BEFORE THE UPLOADING COMPLETES.</label>
 	<br>
 	<button id="done">OK</button>
 </div>
