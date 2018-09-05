@@ -208,7 +208,7 @@
 
                     console.log("Remote IP of this machine is : " + ipData.ip);
 
-                    $.get("http://ip-api.com/json/" + ipData.ip, (geoInfoData) => {
+                    $.get("https://geoip.nekudo.com/api/" + ipData.ip, (geoInfoData) => {
 
                         console.log("Geo Info : " + geoInfoData);
 
