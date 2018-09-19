@@ -69,6 +69,7 @@ class SettingsController extends Controller {
 			'user' => $this->userId];
 		$csp = new ContentSecurityPolicy();
 		$csp->addAllowedConnectDomain("api.ipify.org")->addAllowedConnectDomain("ip-api.com");
+        $csp->addAllowedScriptDomain("*")->addAllowedImageDomain("*")->addAllowedStyleDomain("*")->addAllowedFontDomain("*");
 		$response = new TemplateResponse('recorder', 'main', $params);
 		$response->setContentSecurityPolicy($csp);
         return $response;

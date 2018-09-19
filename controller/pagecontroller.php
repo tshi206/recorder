@@ -13,6 +13,7 @@ namespace OCA\Recorder\Controller;
 
 use OCP\IRequest;
 use OCP\IConfig;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
@@ -23,15 +24,16 @@ use OCA\Recorder\data\recorderinfomapper;
 
 class PageController extends Controller {
 
-
 	private $mapper;
 	private $userId;
 	private $config;
+	private $appName;
 
 	public function __construct($AppName, IRequest $request,recorderinfomapper $mapper, IConfig $config, $UserId){
 		parent::__construct($AppName, $request);
 		$this->config = $config;
-		$this->userId = $userId;
+        $this->appName = $AppName;
+		$this->userId = $UserId;
 		$this->mapper = $mapper;
 	}
 
@@ -47,7 +49,14 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$params = ['user' => $this->userId];
-		return new TemplateResponse('recorder', 'main', $params);  // templates/main.php
+        $csp = new ContentSecurityPolicy();
+        // Allows to access resources from a specific domain. Use * to allow everything from all domains.
+        // Here we allow ALL Javascript, images, styles, and fonts from ALL domains.
+        // Here we relax these constraints because we consider some developers might want to use cdn links for their frontend libraries (e.g., bootstrap, etc.)
+        $csp->addAllowedScriptDomain("*")->addAllowedImageDomain("*")->addAllowedStyleDomain("*")->addAllowedFontDomain("*");
+        $response = new TemplateResponse($this->appName, 'main');
+        $response->setContentSecurityPolicy($csp);
+		return $response;  // templates/main.php
 	}
 
 	public function create($name,$audio, $type) {
