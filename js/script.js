@@ -169,7 +169,11 @@
                 //download audio
                 mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName);
             }
-            else{document.getElementById("myPopup").classList.toggle("show");}
+            else{
+                if (!document.getElementById("myPopup").classList.contains("show")) {
+                    document.getElementById("myPopup").classList.toggle("show");
+                }
+            }
         });
 
         $('#save-recording').on('click', function() {
@@ -179,7 +183,11 @@
                 document.getElementById("myPopup2").classList.remove("show");
                 showwindows('fenetre_alert');
             }
-            else{document.getElementById("myPopup2").classList.toggle("show");}
+            else{
+                if (!document.getElementById("myPopup2").classList.contains("show")) {
+                    document.getElementById("myPopup2").classList.toggle("show");
+                }
+            }
         });
 
 
