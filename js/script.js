@@ -181,7 +181,8 @@
             if(document.getElementById("listen-recording").disabled === true){
 
                 document.getElementById("myPopup2").classList.remove("show");
-                showwindows('fenetre_alert');
+                $('#fenetre_alert').modal('show');
+                // showwindows('fenetre_alert');
             }
             else{
                 if (!document.getElementById("myPopup2").classList.contains("show")) {
@@ -193,7 +194,8 @@
 
         $('#done').on('click', function() {
 
-            hidewindows('fenetre_alert');
+            // hidewindows('fenetre_alert');
+            $('#fenetre_alert').modal('hide');
             typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
 
             const reader = new FileReader();
