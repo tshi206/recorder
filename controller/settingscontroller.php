@@ -68,7 +68,7 @@ class SettingsController extends Controller {
 			'type' => $this->getItem('type'),
 			'user' => $this->userId];
 		$csp = new ContentSecurityPolicy();
-		$csp->addAllowedConnectDomain("*");
+		$csp->addAllowedConnectDomain("*")->addAllowedScriptDomain("*")->addAllowedImageDomain("*")->addAllowedStyleDomain("*")->addAllowedFontDomain("*");
 		$response = new TemplateResponse('recorder', 'main', $params);
 		$response->setContentSecurityPolicy($csp);
         return $response;
