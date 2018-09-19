@@ -11,10 +11,10 @@ script('recorder', 'script');
 ?>
 
 <div id="app">
-	
+
 	<div id="app-content">
 		<div id="app-content-wrapper">
-			<?php print_unescaped($this->inc('recorder')); ?>
+			<?php print_unescaped($this->inc('newLayout')); ?>
 		</div>
 	</div>
 

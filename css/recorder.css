@@ -31,7 +31,7 @@
 	z-index: 1;
 	top: 20px;
     }
-    .show {
+    .show-old {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
@@ -81,19 +81,19 @@
 	font-size: 14px;
     }
 
-#fenetre_alert
-{
-    margin: auto;
-    text-align: center;
-    width: 50%; /*juste à titre d'exemple*/
-    height: 24%;
-    background-color: lightgrey;
-    font-weight: bold;
-    visibility: hidden; /*partie importante: cacher la div et son contenu*/
-    z-index: 9999; /*partie importante: à l'affichage, la div sera au-dessus de tout le reste*/
-    position: fixed; /*à titre d'exemple également*/
-    bottom: 50%;
-    left: 40%;
-    border: 2px solid;
-    border-radius: 5px;
-}
+/*#fenetre_alert*/
+/*{*/
+    /*margin: auto;*/
+    /*text-align: center;*/
+    /*width: 50%; !*juste à titre d'exemple*!*/
+    /*height: 22%;*/
+    /*background-color: lightgrey;*/
+    /*font-weight: bold;*/
+    /*visibility: hidden; !*partie importante: cacher la div et son contenu*!*/
+    /*z-index: 9999; !*partie importante: à l'affichage, la div sera au-dessus de tout le reste*!*/
+    /*position: fixed; !*à titre d'exemple également*!*/
+    /*bottom: 50%;*/
+    /*left: 40%;*/
+    /*border: 2px solid;*/
+    /*border-radius: 5px;*/
+/*}*/
