@@ -116,6 +116,10 @@ h4{
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 /* Smartphones (landscape) ----------- */
@@ -130,6 +134,10 @@ h4{
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -146,6 +154,10 @@ h4{
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 /* iPads (portrait and landscape) ----------- */
@@ -160,6 +172,10 @@ h4{
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -176,6 +192,10 @@ h4{
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 /* iPads (portrait) ----------- */
@@ -190,6 +210,10 @@ h4{
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 /**********
@@ -207,6 +231,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
@@ -221,6 +249,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
@@ -234,6 +266,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -250,6 +286,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 /* iPhone 4 ----------- */
@@ -265,6 +305,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
@@ -278,6 +322,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -294,6 +342,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -307,6 +359,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -323,6 +379,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -336,6 +396,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -352,6 +416,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -365,6 +433,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -381,6 +453,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -394,6 +470,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -410,6 +490,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
@@ -423,6 +507,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
@@ -439,6 +527,10 @@ iPad 3
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
 	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
+	}
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
@@ -452,6 +544,10 @@ iPad 3
 		font-size: 5.5em;
 		color: #228DFF;
 		font-family: Papyrus, fantasy;
+	}
+	.logs {
+		font-size: 16pt;
+		font-weight: bold;
 	}
 }
 
