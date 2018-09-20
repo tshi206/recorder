@@ -25,7 +25,8 @@ h4{
 #welcome {
 	font-size: 24pt;
 	color: aliceblue;
-	text-shadow: -1px 0 #228DFF, 0 1px #228DFF, 1px 0 #228DFF, 0 -1px #228DFF;
+	/*text-shadow: -1px 0 #228DFF, 0 1px #228DFF, 1px 0 #228DFF, 0 -1px #228DFF;*/
+	text-shadow: 0 0 5px #22DFFF;
 }
 
 .selectionwraper{
@@ -88,7 +89,8 @@ h4{
 	/*-webkit-animation: neon2 1.5s ease-in-out infinite alternate;*/
 	/*-moz-animation: neon2 1.5s ease-in-out infinite alternate;*/
 	/*animation: neon2 1.5s ease-in-out infinite alternate;*/
-	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;*/
+	text-shadow: 0 0 5px #22DFFF;
 }
 
 .logs {
