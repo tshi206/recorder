@@ -55,7 +55,7 @@
         <div class="timer-and-logs" >
             <span id="sw_m">00</span>:
             <span id="sw_s">00</span>
-            <section class="logs">
+            <section class="timer-and-logs logs">
                 <div id="audios-container" style="display: inline-block; margin-right: 40px"></div>
                 <label id ="edgeNotice" style="display: inline-block"></label>
                 <label id ="edgeNotice2"></label>
