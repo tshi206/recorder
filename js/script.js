@@ -347,6 +347,7 @@
 
                     let a = document.createElement('a');
                     a.target = '_blank';
+                    a.color = 'aliceblue';
                     a.innerHTML = 'Audio Recorded ' + (index++) + '| Size: ' + bytesToSize(blob.size) + '| Time Length: ' + getTimeLength(Clock.totalSeconds*1000);
 
                     a.href = blobURL;
