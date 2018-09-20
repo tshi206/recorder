@@ -85,14 +85,16 @@ h4{
 	-moz-transition: all 0.5s;
 	transition: all 0.5s;
 	font-size: 5.5em;
-	color: #225FFF;
+	/*color: #225FFF;*/
+	color: aliceblue;
 	font-family: Papyrus, fantasy;
 	/*-webkit-animation: neon2 1.5s ease-in-out infinite alternate;*/
 	/*-moz-animation: neon2 1.5s ease-in-out infinite alternate;*/
 	/*animation: neon2 1.5s ease-in-out infinite alternate;*/
 	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;*/
 	/*text-shadow: 0 0 150px #EFFFFF;*/
-	text-shadow: 0 0 5px #000000, 0 0 10px #228DFF;
+	/*text-shadow: 0 0 5px #000000, 0 0 10px #228DFF;*/
+	text-shadow: 1px 1px 2px black, 0 0 25px #228DFF, 0 0 5px darkblue;
 }
 
 .logs {
