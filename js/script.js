@@ -254,7 +254,7 @@
         });
 
         function checkStringLength(str) {
-            if (!str) {
+            if (str === undefined) {
                 alert("Short sentences and sentences must both contain at least 3 words (separated by single space). Please try again.")
             }
             if (str.length >= 100) {
