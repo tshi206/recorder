@@ -40,9 +40,7 @@
                 </select>
             </div>
         </div>
-        <div id="input-field">
-            <textarea id="name" name="name" class="form-control" rows="5" placeholder="Enter the text that you want to record. For example: Ko toku kupu i konei"></textarea>
-        </div>
+        <textarea id="name" name="name" class="form-control" rows="5" placeholder="Enter the text that you want to record. For example: Ko toku kupu i konei"></textarea>
         <div id="recording-btn-group" class="btn-group btn-group-lg" role="group" aria-label="Start stop">
             <button id="start-recording" type="button" class="btn btn-secondary"><i class="fa fa-microphone"></i><br>Start</button>
             <button id="stop-recording" type="button" class="btn btn-secondary" disabled ><i class="fa fa-microphone-slash"></i><br>Stop</button>
