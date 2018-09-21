@@ -253,6 +253,13 @@
 
         });
 
+        function checkStringLength(str) {
+            if (str.length >= 100) {
+                return str.substr(0, 100);
+            }
+            return str;
+        }
+
         //Assign different values in function of recording type
         function typeChoice(option){
             switch(option) {
@@ -261,6 +268,7 @@
                     timeInterval = 10000; //for word
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
                     fileName = tokens[0];
+                    fileName = checkStringLength(fileName);
                     path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word";
                     break;
@@ -268,6 +276,7 @@
                     timeInterval = 30000; //for list of word
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
                     fileName = tokens[0];
+                    fileName = checkStringLength(fileName);
                     path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word list";
                     break;
@@ -275,6 +284,7 @@
                     timeInterval = 30000; //for short phrases
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
                     fileName = tokens[2];
+                    fileName = checkStringLength(fileName);
                     path ='/DataBase VoNZ short_sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "short sentence";
                     break;
@@ -282,6 +292,7 @@
                     timeInterval = 60000; //for sentences
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
                     fileName = tokens[1];
+                    fileName = checkStringLength(fileName);
                     path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "sentence";
                     break;
@@ -289,6 +300,7 @@
                     timeInterval = 60000; //for other
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
                     fileName = tokens[0];
+                    fileName = checkStringLength(fileName);
                     path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "unclassified";
                     break;
