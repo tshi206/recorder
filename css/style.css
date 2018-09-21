@@ -47,6 +47,7 @@ h4{
 #name{
 	width: 500px;
 	overflow: auto;
+	max-width: 100%;
 	margin: auto;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
