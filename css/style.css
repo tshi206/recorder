@@ -47,6 +47,9 @@ h4{
 #name{
 	width: 450px;
 	margin: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 #recording-btn-group {
