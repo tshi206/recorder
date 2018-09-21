@@ -254,6 +254,9 @@
         });
 
         function checkStringLength(str) {
+            if (!str) {
+                alert("Short sentences and sentences must both contain at least 3 words (separated by single space). Please try again.")
+            }
             if (str.length >= 100) {
                 return str.substr(0, 100);
             }

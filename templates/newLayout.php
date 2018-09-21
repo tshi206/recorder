@@ -34,8 +34,8 @@
                 <select class="custom-select" id="type" name="type" title="type">
                     <option value="word" <?php if (($_['type']) == 'word') echo ' selected="selected"'; ?>>word</option>
                     <option value="listword" <?php if (($_['type']) == 'listword') echo ' selected="selected"'; ?>>list of words (&lt;20 words)</option>
-                    <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>>short sentence (&gt;3 words)</option>
-                    <option value="sentence" <?php if (($_['type']) == 'sentence') echo ' selected="selected"'; ?>>sentence</option>
+                    <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>>short sentence (MUST BE &gt;3 words)</option>
+                    <option value="sentence" <?php if (($_['type']) == 'sentence') echo ' selected="selected"'; ?>>sentence (MUST BE &gt;3 words)</option>
                     <option value="other" <?php if (($_['type']) == 'other') echo ' selected="selected"'; ?>>other</option>
                 </select>
             </div>
