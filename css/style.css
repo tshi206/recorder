@@ -44,8 +44,12 @@ h4{
 	align-items: center;
 }
 
+#input-field {
+	width: 500px;
+}
+
 #name{
-	width: 450px;
+	width: 90%;
 	margin: auto;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
