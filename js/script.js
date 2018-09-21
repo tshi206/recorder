@@ -91,7 +91,7 @@
         // when deploying remember to replace local domain/ip with 'https://cervnzprd01.its.auckland.ac.nz'
         let initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
-        let fileName;
+        let fileName = "";
         let tokens = [];
         let secondStamp = 0;
 
@@ -166,7 +166,7 @@
                     + timeStamp.getSeconds();
 
                 //download audio
-                mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName);
+                mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ checkStringLength(fileName));
             }
             else{
                 $('#popup1').modal();
