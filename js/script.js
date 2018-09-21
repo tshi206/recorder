@@ -92,7 +92,7 @@
         let initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
         let fileName = "n/a";
-        let tokens = ["n/a", "n/a", "n/a"]; // add default element to avoid undefined
+        let tokens = ["n/a", "n/a", "n/a"]; // add default elements to avoid undefined
         let secondStamp = 0;
 
         let Clock = {
@@ -129,6 +129,7 @@
             edgeNotice2.innerHTML = "";
             currentBlob = null;
 
+            tokens = ["n/a", "n/a", "n/a"]; // restore defaults
             typeChoice(document.getElementById('type').options.selectedIndex); //to define the timeInterval
             Clock.start();
             console.log("start recording");
