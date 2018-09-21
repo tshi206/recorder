@@ -160,7 +160,7 @@
         //Always save before recording to align Chrome on Mozilla behaviors
         $('#listen-recording').on('click', function() {
             if(document.getElementById("name").value + "" !== ""){
-                tokens = document.getElementById("name").value.split(" ");
+                tokens = document.getElementById("name").value.trim().split(" ");
                 let result = typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
 
                 if (result === false) {
@@ -201,7 +201,7 @@
             uploadBtn.prop('disabled',true);
             $('#fenetre_alert').modal('hide');
 
-            tokens = document.getElementById("name").value.split(" ");
+            tokens = document.getElementById("name").value.trim().split(" ");
             let result = typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
 
             if (result === false) {

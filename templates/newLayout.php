@@ -33,9 +33,9 @@
                 </div>
                 <select class="custom-select" id="type" name="type" title="type">
                     <option value="word" <?php if (($_['type']) == 'word') echo ' selected="selected"'; ?>>word (less than 10 seconds)</option>
-                    <option value="listword" <?php if (($_['type']) == 'listword') echo ' selected="selected"'; ?>>list of words (&lt;20 words, at most 30 seconds)</option>
-                    <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>>short sentence (MUST BE LONGER THAN 3 words and less than 30 seconds)</option>
-                    <option value="sentence" <?php if (($_['type']) == 'sentence') echo ' selected="selected"'; ?>>sentence (MUST BE LONGER THAN 2 words and less than 1 minute)</option>
+                    <option value="listword" <?php if (($_['type']) == 'listword') echo ' selected="selected"'; ?>>list of words (less than 20 words, at most 30 seconds)</option>
+                    <option value="shortsentence" <?php if (($_['type']) == 'shortsentence') echo ' selected="selected"'; ?>>short sentence (MUST BE LONGER THAN 2 words and less than 30 seconds)</option>
+                    <option value="sentence" <?php if (($_['type']) == 'sentence') echo ' selected="selected"'; ?>>sentence (MUST BE LONGER THAN 1 word and less than 1 minute)</option>
                     <option value="other" <?php if (($_['type']) == 'other') echo ' selected="selected"'; ?>>other (at most 1 minute)</option>
                 </select>
             </div>
