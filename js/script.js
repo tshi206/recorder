@@ -94,6 +94,8 @@
         let fileName = "n/a";
         let tokens = ["n/a", "n/a", "n/a"]; // add default elements to avoid undefined
         let secondStamp = 0;
+        let isDownloaded = false;
+        const warningText = "Short sentences must contain at least 3 words (separated by single space). Sentences must contain at least 2 words (separated by single space). Please make sure your text inputs meet the requirement or select another type of recording and then try again.";
 
         let Clock = {
             totalSeconds: 0,
@@ -117,19 +119,25 @@
             }
         };
 
+        $('#type').on('change', () => {
+            $('#start-recording').prop('disabled', false);
+            $('#stop-recording').prop('disabled', true);
+            $('#save-recording').prop('disabled',true);
+            $('#listen-recording').prop('disabled',true);
+        });
+
         $('#start-recording').on('click', function() {
             this.disabled = true;
             $('#stop-recording').prop('disabled', false);
             $('#save-recording').prop('disabled',true);
             $('#listen-recording').prop('disabled',true);
 
+            isDownloaded = false;
             // noinspection JSUnresolvedVariable
             edgeNotice.innerHTML = "";
             // noinspection JSUnresolvedVariable
             edgeNotice2.innerHTML = "";
             currentBlob = null;
-
-            tokens = ["n/a", "n/a", "n/a"]; // restore defaults
             typeChoice(document.getElementById('type').options.selectedIndex); //to define the timeInterval
             Clock.start();
             console.log("start recording");
@@ -151,12 +159,16 @@
 
         //Always save before recording to align Chrome on Mozilla behaviors
         $('#listen-recording').on('click', function() {
-
             if(document.getElementById("name").value + "" !== ""){
-                this.disabled = true;
-
                 tokens = document.getElementById("name").value.split(" ");
-                typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
+                let result = typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
+
+                if (result === false) {
+                    alert(warningText);
+                    return;
+                }
+
+                isDownloaded = true;
 
                 let timeStamp = new Date();
                 secondStamp = timeStamp.getDate() + "-"
@@ -175,8 +187,7 @@
         });
 
         $('#save-recording').on('click', function() {
-
-            if(document.getElementById("listen-recording").disabled === true){
+            if(isDownloaded === true){
                 $('#fenetre_alert').modal('show');
             }
             else{
@@ -186,10 +197,18 @@
 
 
         $('#done').on('click', function() {
-
-            // hidewindows('fenetre_alert');
+            let uploadBtn = $('#save-recording');
+            uploadBtn.prop('disabled',true);
             $('#fenetre_alert').modal('hide');
-            typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
+
+            tokens = document.getElementById("name").value.split(" ");
+            let result = typeChoice(document.getElementById('type').options.selectedIndex); //to define initialURL
+
+            if (result === false) {
+                uploadBtn.prop('disabled',false);
+                alert(warningText);
+                return;
+            }
 
             const reader = new FileReader();
             const reader2 = new FileReader();
@@ -235,7 +254,8 @@
                             alert("File uploaded. If you do not see a new window opened, you can go to 'Files' at the top left corner");
                             window.open(initialURL);
                         }).fail((xhr, status, error) => {
-                            alert(error);
+                            uploadBtn.prop('disabled',false);
+                            alert(error + ". Please try again later.");
                         });
 
                     });
@@ -251,13 +271,11 @@
                 // This is just for debug purposes
                 console.log(text);
             };
-
         });
 
         function checkStringLength(str) {
-            if (str === undefined) {
-                alert("Short sentences must contain at least 3 words (separated by single space). Sentences must contain at least 2 words (separated by single space). Please make sure your text inputs meet the requirement or select another type of recording and then try again.");
-                $('#listen-recording').prop('disabled',false);
+            if (str === undefined || str.match("^\\s*$")) {
+                return false;
             }
             if (str.length >= 100) {
                 return str.substr(0, 100);
@@ -267,6 +285,7 @@
 
         //Assign different values in function of recording type
         function typeChoice(option){
+            let result = true;
             switch(option) {
                 // when deploying remember to replace local domain/ip with 'https://cervnzprd01.its.auckland.ac.nz'
                 case 0:
@@ -274,6 +293,9 @@
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';
                     fileName = tokens[0];
                     fileName = checkStringLength(fileName);
+                    if (fileName === false) {
+                        result = false;
+                    }
                     path ='/DataBase VoNZ word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word";
                     break;
@@ -282,6 +304,9 @@
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20list_word&fileid=82';
                     fileName = tokens[0];
                     fileName = checkStringLength(fileName);
+                    if (fileName === false) {
+                        result = false;
+                    }
                     path ='/DataBase VoNZ list_word/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "word list";
                     break;
@@ -290,6 +315,9 @@
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20short_sentence&fileid=560';
                     fileName = tokens[2];
                     fileName = checkStringLength(fileName);
+                    if (fileName === false) {
+                        result = false;
+                    }
                     path ='/DataBase VoNZ short_sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "short sentence";
                     break;
@@ -298,6 +326,9 @@
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20sentence&fileid=83';
                     fileName = tokens[1];
                     fileName = checkStringLength(fileName);
+                    if (fileName === false) {
+                        result = false;
+                    }
                     path ='/DataBase VoNZ sentence/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "sentence";
                     break;
@@ -306,10 +337,14 @@
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/Unclassified%20Data%20VONZ&fileid=84';
                     fileName = tokens[0];
                     fileName = checkStringLength(fileName);
+                    if (fileName === false) {
+                        result = false;
+                    }
                     path ='/Unclassified Data VONZ/'+document.getElementById("user").value + '_' + secondStamp +'_'+ fileName+'.txt';
                     type = "unclassified";
                     break;
             }
+            return result;
         }
 
         function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
