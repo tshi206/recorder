@@ -91,8 +91,8 @@
         // when deploying remember to replace local domain/ip with 'https://cervnzprd01.its.auckland.ac.nz'
         let initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
-        let fileName = "";
-        let tokens = [""]; // add default element to avoid undefined
+        let fileName = "n/a";
+        let tokens = ["n/a"]; // add default element to avoid undefined
         let secondStamp = 0;
 
         let Clock = {
