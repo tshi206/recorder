@@ -257,6 +257,7 @@
         function checkStringLength(str) {
             if (str === undefined) {
                 alert("Short sentences must contain at least 3 words (separated by single space). Sentences must contain at least 2 words (separated by single space). Please make sure your text inputs meet the requirement or select another type of recording and then try again.");
+                $('#listen-recording').prop('disabled',false);
             }
             if (str.length >= 100) {
                 return str.substr(0, 100);
