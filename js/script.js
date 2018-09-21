@@ -176,10 +176,7 @@
         $('#save-recording').on('click', function() {
 
             if(document.getElementById("listen-recording").disabled === true){
-
-                document.getElementById("myPopup2").classList.remove("show");
                 $('#fenetre_alert').modal('show');
-                // showwindows('fenetre_alert');
             }
             else{
                 $('#popup2').modal();

@@ -5,7 +5,7 @@
     <description>This application enables users to record their voice and download the recording to their computer. In the context of VoNZ project, users have to choose a type of recording and set the recording content. In addition they can download their recordings into the server</description>
     <licence>AGPL</licence>
     <author>Shawn,Daugieras,Mason</author>
-    <version>1.2.5</version>
+    <version>1.2.6</version>
     <namespace>Recorder</namespace>
     <category>other</category>
     <dependencies>
