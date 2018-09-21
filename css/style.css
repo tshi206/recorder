@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Meie+Script|Shadows+Into+Light|Arvo|Monda');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-#recorder {
+#main-area {
 	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 
@@ -11,8 +11,7 @@
 }
 
 #content {
-	background-image: url("../img/free-hd-pc-microphone.jpg");
-	background-size: cover;
+	background: #222222 repeating-linear-gradient(45deg, #2b2b2b 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 0;
 }
 
 h4{

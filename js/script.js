@@ -88,7 +88,7 @@
         // let chunks = [];
         let currentBlob;
         let type = "word";
-        // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
+        // when deploying remember to replace local domain/ip with 'https://cervnzprd01.its.auckland.ac.nz'
         let initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56'; //by default, type = word
         let path = '/DataBase VoNZ word/newfile.txt'; //by default, type = word
         let fileName;
@@ -153,7 +153,6 @@
 
             if(document.getElementById("name").value + "" !== ""){
                 this.disabled = true;
-                document.getElementById("myPopup").classList.remove("show");
 
                 tokens = document.getElementById("name").value.split(" ");
                 typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
@@ -170,9 +169,7 @@
                 mediaRecorder.save(document.getElementById("user").value + '_' + secondStamp +'_'+ fileName);
             }
             else{
-                if (!document.getElementById("myPopup").classList.contains("show")) {
-                    document.getElementById("myPopup").classList.toggle("show");
-                }
+                $('#popup1').modal();
             }
         });
 
@@ -185,9 +182,7 @@
                 // showwindows('fenetre_alert');
             }
             else{
-                if (!document.getElementById("myPopup2").classList.contains("show")) {
-                    document.getElementById("myPopup2").classList.toggle("show");
-                }
+                $('#popup2').modal();
             }
         });
 
@@ -259,19 +254,10 @@
 
         });
 
-
-        function showwindows(id) {
-            document.getElementById(id).style.visibility = 'visible';
-        }
-        function hidewindows(id) {
-            document.getElementById(id).style.visibility = 'hidden';
-        }
-
-
         //Assign different values in function of recording type
         function typeChoice(option){
             switch(option) {
-                // TODO : when deploying remember to replace 'http://192.168.1.102/owncloud' with 'https://cervnzprd01.its.auckland.ac.nz'
+                // when deploying remember to replace local domain/ip with 'https://cervnzprd01.its.auckland.ac.nz'
                 case 0:
                     timeInterval = 10000; //for word
                     initialURL = 'https://cervnzprd01.its.auckland.ac.nz/p4/owncloud/index.php/apps/files/?dir=/DataBase%20VoNZ%20word&fileid=56';

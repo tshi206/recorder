@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div id="recorder" class="container">
-    <div style="text-align: center;">
+    <div id="main-area" style="text-align: center;">
         <div class="row">
             <h4 id="welcome" class="col-lg-12 col-md-12 col-sm-12">Please fill the information below before you start your recording</h4>
         </div>
@@ -41,11 +41,6 @@
             </div>
         </div>
         <textarea id="name" name="name" class="form-control" rows="5" placeholder="Enter the text that you want to record. For example: Ko toku kupu i konei"></textarea>
-        <br>
-        <span id= "myPopup" class = "timer-and-logs logs tips">Please fill the textarea before downloading it !</span>
-        <br>
-        <span id= "myPopup2" class = "timer-and-logs logs tips">Please download and listen to your recording before uploading it !</span>
-        <br>
         <div id="recording-btn-group" class="btn-group btn-group-lg" role="group" aria-label="Start stop">
             <button id="start-recording" type="button" class="btn btn-secondary"><i class="fa fa-microphone"></i><br>Start</button>
             <button id="stop-recording" type="button" class="btn btn-secondary" disabled ><i class="fa fa-microphone-slash"></i><br>Stop</button>
