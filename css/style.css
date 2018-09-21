@@ -10,7 +10,7 @@
 	color: red;
 }
 
-#content {
+#app-content-wrapper {
 	background: #222222 repeating-linear-gradient(45deg, #2b2b2b 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 / 15px 15px repeat;
 	background-size: contain;
 }
