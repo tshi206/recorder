@@ -55,8 +55,7 @@ script('recorder', 'script');
                 Please fill in the textarea before downloading it.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="done" type="button" class="btn btn-primary">Got it</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
             </div>
         </div>
     </div>
@@ -75,8 +74,7 @@ script('recorder', 'script');
                 Please download and listen to your recording before uploading it.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="done" type="button" class="btn btn-primary">Got it</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
             </div>
         </div>
     </div>
