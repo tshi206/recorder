@@ -95,7 +95,7 @@
         let tokens = ["n/a", "n/a", "n/a"]; // add default elements to avoid undefined
         let secondStamp = 0;
         let isDownloaded = false;
-        const warningText = "Short sentences must contain at least 3 words (separated by single space). Sentences must contain at least 2 words (separated by single space). Please make sure your text inputs meet the requirement or select another type of recording and then try again.";
+        const warningText = "Short sentences must contain at least 3 words (separated by SINGLE SPACE). Sentences must contain at least 2 words (separated by SINGLE SPACE). Please make sure your text inputs meet the requirement or select another type of recording and then try again.";
 
         let Clock = {
             totalSeconds: 0,
@@ -159,7 +159,7 @@
 
         //Always save before recording to align Chrome on Mozilla behaviors
         $('#listen-recording').on('click', function() {
-            if(document.getElementById("name").value + "" !== ""){
+            if((document.getElementById("name").value + "").trim() !== ""){
                 tokens = document.getElementById("name").value.trim().split(" ");
                 let result = typeChoice(document.getElementById('type').options.selectedIndex); //to define fileName
 
@@ -188,6 +188,10 @@
 
         $('#save-recording').on('click', function() {
             if(isDownloaded === true){
+                if((document.getElementById("name").value + "").trim() === ""){
+                    $('#popup3').modal();
+                    return;
+                }
                 $('#fenetre_alert').modal('show');
             }
             else{
